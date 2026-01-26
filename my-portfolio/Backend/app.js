@@ -26,6 +26,10 @@ app.use('/api/auth', authRouter);
 app.use('/api/messages', messageRouter);
 
 // Routes (We will link these next)
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'success', message: 'Portfolio Backend is running!' });
+});
+
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'success', message: 'Server is healthy' });
 });
