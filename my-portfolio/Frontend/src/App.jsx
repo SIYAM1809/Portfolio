@@ -49,9 +49,9 @@ const LoginPage = () => {
     setError('');
 
     try {
-      // Using fetch directly or importing api from services/api
-      // Since api interceptor might redirect on 401, direct fetch is safer for login
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      // Using fetch directly to avoid interceptor redirects
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
