@@ -9,7 +9,13 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://portfolio-frontend.vercel.app'], // Replace with your actual Vercel URL after deployment
+  origin: [
+    'http://localhost:5173',
+    'https://portfolio-frontend.vercel.app',
+    'https://portfolio-git-main-md-aman-uddin-siyams-projects.vercel.app',
+    'https://portfolio-8uz28qfu7-md-aman-uddin-siyams-projects.vercel.app',
+    'https://portfolio-md-aman-uddin-siyams-projects.vercel.app'
+  ],
   credentials: true
 }));
 app.use(express.json());
