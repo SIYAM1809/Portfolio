@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
+import Projects from './pages/Projects';
 import DashboardLayout from './pages/admin/DashboardLayout';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import CursorSpotlight from './components/animations/CursorSpotlight';
@@ -15,6 +16,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/projects/:id" element={<ProjectDetails />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/login" element={<LoginPage />} />
 
         {/* Protected Admin Routes */}
