@@ -34,6 +34,8 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'success', message: 'Server is healthy' });
 });
 
+app.get('/favicon.ico', (req, res) => res.status(204));
+
 // 404 Handler
 app.use((req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on this server!`);
