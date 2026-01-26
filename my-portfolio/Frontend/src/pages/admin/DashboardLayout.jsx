@@ -13,7 +13,8 @@ import {
     Star,
     Eye,
     Search,
-    Filter
+    Filter,
+    RefreshCw
 } from 'lucide-react';
 import ProjectForm from './ProjectForm';
 import api from '../../services/api';
@@ -92,6 +93,22 @@ const DashboardLayout = () => {
             setMessages(messages.filter(m => m._id !== messageId));
         } catch (error) {
             console.error('Error deleting message:', error);
+        }
+    };
+
+    const handleResetDb = async () => {
+        if (!window.confirm('⚠️ WARNING: This will delete ALL existing projects and reset them to the default portfolio data. Are you sure?')) return;
+
+        setLoading(true);
+        try {
+            await api.post('/projects/seed'); // Uses the token from api interceptor
+            alert('Database reset successfully!');
+            fetchData(); // Refresh list
+        } catch (error) {
+            console.error('Error seeding database:', error);
+            alert('Failed to reset database: ' + (error.response?.data?.message || error.message));
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -208,16 +225,31 @@ const DashboardLayout = () => {
 
                                     <div className="quick-actions">
                                         <h2>Quick Actions</h2>
-                                        <button
-                                            onClick={() => {
-                                                setEditingProject(null);
-                                                setShowProjectForm(true);
-                                            }}
-                                            className="quick-action-btn"
-                                        >
-                                            <Plus />
-                                            Create New Project
-                                        </button>
+                                        <div className="action-buttons-grid" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                                            <button
+                                                onClick={() => {
+                                                    setEditingProject(null);
+                                                    setShowProjectForm(true);
+                                                }}
+                                                className="quick-action-btn"
+                                            >
+                                                <Plus />
+                                                Create New Project
+                                            </button>
+
+                                            <button
+                                                onClick={handleResetDb}
+                                                className="quick-action-btn warning"
+                                                style={{
+                                                    background: 'rgba(255, 77, 77, 0.1)',
+                                                    color: '#ff4d4d',
+                                                    border: '1px solid rgba(255, 77, 77, 0.2)'
+                                                }}
+                                            >
+                                                <RefreshCw size={20} />
+                                                Reset Database Data
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             )}

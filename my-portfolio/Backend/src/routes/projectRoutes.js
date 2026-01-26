@@ -9,7 +9,8 @@ router
     .get(projectController.getAllProjects)
     .post(protect, projectController.createProject);
 
-router.get('/seed', projectController.seedProjects);
+// Seed Projects (Protected)
+router.post('/seed', protect, projectController.seedProjects);
 
 router
     .route('/:id')
