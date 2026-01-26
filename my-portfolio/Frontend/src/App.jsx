@@ -50,7 +50,10 @@ const LoginPage = () => {
 
     try {
       // Using fetch directly to avoid interceptor redirects
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const rawApiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      // Remove trailing slash if present to avoid //auth/login
+      const API_URL = rawApiUrl.replace(/\/$/, '');
+
       const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
