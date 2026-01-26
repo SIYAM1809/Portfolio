@@ -99,7 +99,9 @@ Full-stack MERN Real Estate Management System.
 
 const seedProjects = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        const dbUri = process.argv[2] || process.env.MONGO_URI;
+        await mongoose.connect(dbUri);
+        console.log(`✅ Connecting to DB: ${dbUri.includes('localhost') ? 'Local' : 'Remote'}...`);
         console.log('✅ Connected to MongoDB');
 
         // Clear existing projects to avoid duplicates
