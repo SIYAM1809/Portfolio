@@ -1,0 +1,12 @@
+.cursor-spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    /* Just below purely interactive top-level elements like tooltips */
+    mix-blend-mode: screen;
+    /* Makes the glow blend nicely with dark backgrounds */
+}
