@@ -8,7 +8,10 @@ const messageRouter = require('./src/routes/messageRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://portfolio-frontend.vercel.app'], // Replace with your actual Vercel URL after deployment
+  credentials: true
+}));
 app.use(express.json());
 
 // Debug Middleware
