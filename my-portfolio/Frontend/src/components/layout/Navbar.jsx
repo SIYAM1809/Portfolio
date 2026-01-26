@@ -55,9 +55,7 @@ const Navbar = () => {
                             {link.title}
                         </a>
                     ))}
-                    <a href="/admin" className="btn-primary nav-cta">
-                        Admin
-                    </a>
+
                 </div>
 
                 {/* Mobile Filter Button */}
@@ -87,9 +85,7 @@ const Navbar = () => {
                                     {link.title}
                                 </a>
                             ))}
-                            <a href="/admin" className="mobile-link highlight">
-                                Admin Dashboard
-                            </a>
+
 
                             <div className="mobile-socials">
                                 <a href="#" target="_blank" rel="noreferrer"><Github size={20} /></a>
