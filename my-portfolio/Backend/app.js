@@ -15,7 +15,8 @@ app.use(cors({
     'https://portfolio-git-main-md-aman-uddin-siyams-projects.vercel.app',
     'https://portfolio-8uz28qfu7-md-aman-uddin-siyams-projects.vercel.app',
     'https://portfolio-md-aman-uddin-siyams-projects.vercel.app',
-    'https://portfolio-sable-kappa-71.vercel.app'
+    'https://portfolio-sable-kappa-71.vercel.app',
+    'https://aman-uddin-siyam-portfolio.vercel.app'
   ],
   credentials: true
 }));
