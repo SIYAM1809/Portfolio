@@ -1,14 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ title, description, image }) => {
-    const siteTitle = 'John Doe | Full Stack Developer';
-    const defaultDescription = 'Portfolio of John Doe, a Full Stack Developer specializing in the MERN stack and modern UI/UX design.';
-    const siteUrl = 'https://johndoe.com'; // Replace with actual URL
+    const siteTitle = 'Md. Aman Uddin Siyam | Machine Learning Engineer';
+    const defaultDescription = 'Portfolio of Md. Aman Uddin Siyam, a final-year CSE student specializing in AI, Deep Learning, and Computer Vision.';
+    const siteUrl = 'https://aman-uddin-siyam-portfolio.vercel.app'; // Replace with actual URL
 
     return (
         <Helmet>
             {/* Basic Meta Tags */}
-            <title>{title ? `${title} | John Doe` : siteTitle}</title>
+            <title>{title ? `${title} | Md. Aman Uddin Siyam` : siteTitle}</title>
             <meta name="description" content={description || defaultDescription} />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
 

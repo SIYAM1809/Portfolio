@@ -663,17 +663,9 @@ textarea.input-field {
         font-size: 3.5rem;
     }
 
+    /* Removed stacking logic to keep side-by-side on laptops/tablets */
     .hero-container {
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-
-    .hero-content {
-        align-items: center;
-    }
-
-    .hero-cta {
-        justify-content: center;
+        gap: 2rem;
     }
 
     .about-grid {
@@ -711,6 +703,20 @@ textarea.input-field {
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2.8rem;
+    }
+
+    /* Move stacking logic here for mobile */
+    .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .hero-content {
+        align-items: center;
+    }
+
+    .hero-cta {
+        justify-content: center;
     }
 
     .stats-container {
