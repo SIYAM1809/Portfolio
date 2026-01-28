@@ -1,4 +1,25 @@
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import Reveal from './animations/Reveal';
 import { skillsData } from '../data/portfolioData.jsx';
+
+const SkillSection = () => {
+    return (
+        <section id="skills" className="py-20">
+            <div className="container mx-auto px-4">
+                <Reveal>
+                    <h2 className="section-title mb-16 text-center">Technical <span className="text-gradient">Skills</span></h2>
+                </Reveal>
+
+                <div className="grid gap-6 md:grid-cols-3">
+                    {skillsData.map((category, idx) => (
+                        <SpotlightCard key={idx} category={category} idx={idx} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
 const SpotlightCard = ({ category, idx }) => {
     let mouseX = useMotionValue(0);
     let mouseY = useMotionValue(0);
