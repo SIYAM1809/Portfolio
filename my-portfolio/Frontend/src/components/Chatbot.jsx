@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send } from 'lucide-react';
-import { chatbotData } from '../data/portfolioData';
+import { chatbotData } from '../data/portfolioData.jsx';
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -74,8 +74,8 @@ const Chatbot = () => {
                                     className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
                                 >
                                     <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.type === 'user'
-                                            ? 'bg-primary text-black rounded-tr-none'
-                                            : 'bg-white/10 text-gray-200 rounded-tl-none'
+                                        ? 'bg-primary text-black rounded-tr-none'
+                                        : 'bg-white/10 text-gray-200 rounded-tl-none'
                                         }`}>
                                         {msg.text}
                                     </div>

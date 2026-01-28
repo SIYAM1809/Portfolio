@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Reveal from './animations/Reveal';
-import { hobbiesData } from '../data/portfolioData';
+import { hobbiesData } from '../data/portfolioData.jsx';
 
 const HobbySection = () => {
     return (

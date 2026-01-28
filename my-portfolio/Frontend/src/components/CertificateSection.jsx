@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Reveal from './animations/Reveal';
-import { certificateCategories } from '../data/portfolioData';
+import { certificateCategories } from '../data/portfolioData.jsx';
 import { Award, ExternalLink } from 'lucide-react';
 
 const CertificateSection = () => {

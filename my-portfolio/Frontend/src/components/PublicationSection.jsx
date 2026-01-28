@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Reveal from './animations/Reveal';
-import { publicationsData } from '../data/portfolioData';
+import { publicationsData } from '../data/portfolioData.jsx';
 import { ExternalLink, BookOpen, Award } from 'lucide-react';
 
 const PublicationSection = () => {

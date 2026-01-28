@@ -16,14 +16,16 @@ import CertificateSection from '../components/CertificateSection';
 import SkillSection from '../components/SkillSection';
 import HobbySection from '../components/HobbySection';
 import Chatbot from '../components/Chatbot';
-import { bioData } from '../data/portfolioData';
+import { bioData } from '../data/portfolioData.jsx';
 
 const Home = () => {
+    if (!bioData) return <div className="min-h-screen flex items-center justify-center text-white">Loading configuration...</div>;
+
     return (
         <div className="home-layout">
             <SEO
                 title="Home"
-                description={bioData.shortBio}
+                description={bioData.shortBio || "Portfolio"}
             />
             <Navbar />
 

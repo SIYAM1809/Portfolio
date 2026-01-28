@@ -1,3 +1,4 @@
+import { skillsData } from '../data/portfolioData.jsx';
 const SpotlightCard = ({ category, idx }) => {
     let mouseX = useMotionValue(0);
     let mouseY = useMotionValue(0);
