@@ -68,7 +68,7 @@ const Chatbot = () => {
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="fixed bottom-6 right-6 z-50 p-4 bg-[#00D9FF] rounded-full shadow-lg shadow-[#00D9FF]/20 text-black font-bold flex items-center justify-center group"
+                className="fixed bottom-6 right-6 z-[9999] p-4 bg-[#00D9FF] rounded-full shadow-lg shadow-[#00D9FF]/20 text-black font-bold flex items-center justify-center group"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <div className="absolute inset-0 rounded-full animate-ping bg-[#00D9FF] opacity-20 group-hover:opacity-40"></div>
@@ -81,7 +81,7 @@ const Chatbot = () => {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] glass-card flex flex-col z-50 overflow-hidden border border-[#00D9FF]/20 shadow-2xl"
+                        className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] glass-card flex flex-col z-[9999] overflow-hidden border border-[#00D9FF]/20 shadow-2xl"
                     >
                         {/* Header */}
                         <div className="p-4 bg-[#00D9FF]/10 border-b border-white/10 flex justify-between items-center">
