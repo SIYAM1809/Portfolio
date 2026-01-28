@@ -188,3 +188,87 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+/* ========================
+   NEW ANIMATION VARIANTS
+   ======================== */
+
+/* Purple/Pink Reverse Spin (For Contact) */
+.spinning-border-card-purple {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: rgba(10, 10, 20, 0.6);
+  border-radius: 16px;
+}
+
+.spinning-border-card-purple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  /* Purple/Pink Gradient */
+  background: conic-gradient(transparent, transparent, transparent, var(--secondary-purple), var(--accent-pink));
+  transform: translate(-50%, -50%);
+  animation: spin-border-global 3s linear infinite reverse;
+  /* Reverse + Faster */
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.spinning-border-card-purple::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: rgba(10, 10, 20, 0.95);
+  border-radius: 16px;
+  z-index: -1;
+}
+
+.spinning-border-card-purple:hover::before {
+  opacity: 1;
+}
+
+/* Circular Spin (For Hobbies) */
+.spinning-border-circle {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: rgba(10, 10, 20, 0.6);
+  border-radius: 50%;
+  /* Force Circle */
+}
+
+.spinning-border-circle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  /* Cyan/Purple Mix */
+  background: conic-gradient(transparent, transparent, transparent, var(--primary-cyan), var(--secondary-purple));
+  transform: translate(-50%, -50%);
+  animation: spin-border-global 4s linear infinite;
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.spinning-border-circle::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  /* Slightly thicker border apparent width */
+  background: rgba(10, 10, 20, 0.95);
+  border-radius: 50%;
+  /* Inner Circle */
+  z-index: -1;
+}
+
+.spinning-border-circle:hover::before {
+  opacity: 1;
+}

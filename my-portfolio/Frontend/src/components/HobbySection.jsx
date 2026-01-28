@@ -19,7 +19,7 @@ const HobbySection = () => {
                     {hobbiesData.map((hobby, index) => (
                         <Reveal key={index} delay={index * 0.1}>
                             <motion.div
-                                className="glass-card w-40 h-40 flex flex-col items-center justify-center gap-3 rounded-full border-2 border-white/5 hover:border-primary/50 transition-all cursor-pointer relative z-10 bg-black/40"
+                                className="spinning-border-circle w-40 h-40 flex flex-col items-center justify-center gap-3 rounded-full transition-all cursor-pointer relative z-10"
                                 animate={{ y: [0, -15, 0] }}
                                 transition={{
                                     duration: 3 + index,

@@ -389,7 +389,7 @@ const ContactSection = ({ bioData }) => {
                     <h2 className="section-title">Get In <span className="text-gradient">Touch</span></h2>
                 </Reveal>
 
-                <div className="contact-container glass-card">
+                <div className="contact-container spinning-border-card-purple">
                     <div className="contact-info">
                         <h3>Let's work together!</h3>
                         <p>
