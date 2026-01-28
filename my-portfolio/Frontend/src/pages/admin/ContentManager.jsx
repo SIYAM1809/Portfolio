@@ -81,24 +81,160 @@ const ContentManager = () => {
             <div className="form-container bg-white/5 p-6 rounded-xl border border-white/10">
                 {activeSection === 'bio' && (
                     <div className="space-y-6">
+                        {/* Name & Short Bio */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+                                <input
+                                    type="text"
+                                    value={localData.bioData.name}
+                                    onChange={(e) => updateBio('name', e.target.value)}
+                                    className="w-full bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-primary focus:outline-none"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-400 mb-2">Availability Status</label>
+                                <input
+                                    type="text"
+                                    value={localData.bioData.contact.availability}
+                                    onChange={(e) => setLocalData(prev => ({ ...prev, bioData: { ...prev.bioData, contact: { ...prev.bioData.contact, availability: e.target.value } } }))}
+                                    className="w-full bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-primary focus:outline-none"
+                                />
+                            </div>
+                        </div>
+
                         <div>
-                            <label className="block text-sm font-medium text-gray-400 mb-2">Short Bio</label>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Short Bio (Hero Section)</label>
                             <textarea
                                 value={localData.bioData.shortBio}
                                 onChange={(e) => updateBio('shortBio', e.target.value)}
                                 className="w-full bg-black/30 border border-white/10 rounded-lg p-3 text-white h-24 focus:border-primary focus:outline-none"
                             />
                         </div>
+
+                        {/* Roles */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-400 mb-2">Availability Status</label>
-                            <input
-                                type="text"
-                                value={localData.bioData.contact.availability}
-                                onChange={(e) => setLocalData(prev => ({ ...prev, bioData: { ...prev.bioData, contact: { ...prev.bioData.contact, availability: e.target.value } } }))}
-                                className="w-full bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-primary focus:outline-none"
-                            />
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Roles (Typewriter Effect)</label>
+                            <div className="flex flex-wrap gap-2">
+                                {localData.bioData.roles.map((role, idx) => (
+                                    <div key={idx} className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
+                                        <span className="text-sm text-gray-300">{role}</span>
+                                        <button
+                                            onClick={() => {
+                                                const newRoles = [...localData.bioData.roles];
+                                                newRoles.splice(idx, 1);
+                                                updateBio('roles', newRoles);
+                                            }}
+                                            className="text-red-400 hover:text-red-300"
+                                        >
+                                            <Trash2 size={14} />
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    onClick={() => {
+                                        const newRole = prompt("Enter new role:");
+                                        if (newRole) {
+                                            updateBio('roles', [...localData.bioData.roles, newRole]);
+                                        }
+                                    }}
+                                    className="px-3 py-1 bg-primary/20 text-primary border border-primary/30 rounded-full hover:bg-primary/30 transition-colors flex items-center gap-1 text-sm"
+                                >
+                                    <Plus size={14} /> Add Role
+                                </button>
+                            </div>
                         </div>
-                        {/* Add more bio fields here as needed */}
+
+                        {/* About Me Paragraphs */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">About Me (Paragraphs)</label>
+                            <div className="space-y-3">
+                                {localData.bioData.aboutText.map((text, idx) => (
+                                    <div key={idx} className="relative group">
+                                        <textarea
+                                            value={text}
+                                            onChange={(e) => {
+                                                const newText = [...localData.bioData.aboutText];
+                                                newText[idx] = e.target.value;
+                                                updateBio('aboutText', newText);
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-lg p-3 text-white h-24 focus:border-primary focus:outline-none"
+                                        />
+                                        <button
+                                            onClick={() => {
+                                                const newText = [...localData.bioData.aboutText];
+                                                newText.splice(idx, 1);
+                                                updateBio('aboutText', newText);
+                                            }}
+                                            className="absolute top-2 right-2 text-gray-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    onClick={() => updateBio('aboutText', [...localData.bioData.aboutText, "New paragraph..."])}
+                                    className="w-full py-2 border-2 border-dashed border-white/10 rounded-lg text-gray-400 hover:text-white hover:border-primary/50 transition-all flex items-center justify-center gap-2"
+                                >
+                                    <Plus size={16} /> Add Paragraph
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Contact Info */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                <input
+                                    type="text"
+                                    value={localData.bioData.contact.email}
+                                    onChange={(e) => setLocalData(prev => ({ ...prev, bioData: { ...prev.bioData, contact: { ...prev.bioData.contact, email: e.target.value } } }))}
+                                    className="w-full bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-primary focus:outline-none"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-400 mb-2">Location</label>
+                                <input
+                                    type="text"
+                                    value={localData.bioData.contact.location}
+                                    onChange={(e) => setLocalData(prev => ({ ...prev, bioData: { ...prev.bioData, contact: { ...prev.bioData.contact, location: e.target.value } } }))}
+                                    className="w-full bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-primary focus:outline-none"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Stats */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Stats</label>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {localData.bioData.stats.map((stat, idx) => (
+                                    <div key={idx} className="p-3 bg-white/5 rounded-lg border border-white/10">
+                                        <input
+                                            type="text"
+                                            value={stat.label}
+                                            onChange={(e) => {
+                                                const newStats = [...localData.bioData.stats];
+                                                newStats[idx].label = e.target.value;
+                                                updateBio('stats', newStats);
+                                            }}
+                                            className="w-full bg-transparent text-sm text-gray-400 mb-1 focus:outline-none"
+                                            placeholder="Label"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={stat.value}
+                                            onChange={(e) => {
+                                                const newStats = [...localData.bioData.stats];
+                                                newStats[idx].value = e.target.value;
+                                                updateBio('stats', newStats);
+                                            }}
+                                            className="w-full bg-transparent text-lg font-bold text-white focus:outline-none"
+                                            placeholder="Value"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 )}
 
