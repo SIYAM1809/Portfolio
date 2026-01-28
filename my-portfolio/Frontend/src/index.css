@@ -133,6 +133,56 @@ a {
   text-decoration: none;
 }
 
+/* ========================
+   REUSABLE SPINNING BORDER ANIMATION 
+   ======================== */
+.spinning-border-card {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: rgba(10, 10, 20, 0.6);
+  border-radius: 16px;
+}
+
+.spinning-border-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: conic-gradient(transparent, transparent, transparent, var(--primary-cyan));
+  transform: translate(-50%, -50%);
+  animation: spin-border-global 4s linear infinite;
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.spinning-border-card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: rgba(10, 10, 20, 0.95);
+  /* Better match for card bg */
+  border-radius: 16px;
+  z-index: -1;
+}
+
+.spinning-border-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes spin-border-global {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 ul {
   list-style: none;
   padding: 0;

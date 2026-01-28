@@ -48,8 +48,9 @@ const Footer = () => {
                             rel="noreferrer"
                             aria-label={social.label}
                             className="p-3 bg-white/5 rounded-full hover:bg-white/10 hover:text-primary transition-all border border-white/5 hover:border-primary/50 text-gray-300"
-                            whileHover={{ y: -5, scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{ y: -5, scale: 1.2, rotate: 5 }}
+                            whileTap={{ scale: 0.9 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
                         >
                             {social.icon}
                         </motion.a>

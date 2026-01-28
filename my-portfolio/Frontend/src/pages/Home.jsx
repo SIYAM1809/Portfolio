@@ -215,29 +215,37 @@ const AboutSection = () => {
         <section className="about-section" id="about">
             <div className="container">
                 <Reveal>
-                    <h2 className="section-title">About <span className="text-gradient">Me</span></h2>
+                    <h2 className="section-title mb-16">About <span className="text-gradient">Me</span></h2>
                 </Reveal>
 
-                <div className="about-grid" style={{ gridTemplateColumns: '1fr' }}>
-                    <div className="about-content">
-                        <Reveal delay={0.2}>
-                            {bioData.aboutText.map((paragraph, idx) => (
-                                <p key={idx} className="about-text mb-4">
-                                    {paragraph}
-                                </p>
-                            ))}
-                        </Reveal>
+                <div className="spinning-border-card p-8 md:p-12 relative">
+                    {/* Background decoration */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 pointer-events-none" />
 
-                        <Reveal delay={0.4}>
-                            <div className="stats-container mt-8">
-                                {bioData.stats.map((stat, index) => (
-                                    <div key={index} className="stat-item">
-                                        <h3>{stat.value}</h3>
-                                        <p>{stat.label}</p>
-                                    </div>
+                    <div className="about-grid" style={{ gridTemplateColumns: '1fr' }}>
+                        <div className="about-content">
+                            <Reveal delay={0.2}>
+                                {bioData.aboutText.map((paragraph, idx) => (
+                                    <p key={idx} className="about-text mb-4 text-gray-300">
+                                        {paragraph}
+                                    </p>
                                 ))}
-                            </div>
-                        </Reveal>
+                            </Reveal>
+
+                            <Reveal delay={0.4}>
+                                <div className="stats-container mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-white/10">
+                                    {bioData.stats.map((stat, index) => (
+                                        <div
+                                            key={index}
+                                            className="stat-item text-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+                                        >
+                                            <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400 mb-2">{stat.value}</h3>
+                                            <p className="text-sm text-gray-400 font-medium uppercase tracking-wider">{stat.label}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </Reveal>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,8 +296,14 @@ const FeaturedProjects = () => {
 
                 <Reveal delay={0.4}>
                     <div className="see-more-container">
-                        <Link to="/projects" className="btn btn-outline">
-                            View All Projects <ArrowRight size={16} />
+                        <Link
+                            to="/projects"
+                            className="group relative px-8 py-3 bg-gradient-to-r from-primary to-purple-600 rounded-full font-bold text-white overflow-hidden shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:scale-105 active:scale-95"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                View All Projects <ArrowRight size={18} />
+                            </span>
+                            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                         </Link>
                     </div>
                 </Reveal>
@@ -420,13 +434,23 @@ const ContactSection = () => {
                             />
                         </div>
 
-                        <button
+                        <motion.button
                             type="submit"
-                            className="btn btn-primary submit-btn"
+                            className="btn btn-primary submit-btn relative overflow-hidden"
                             disabled={status === 'loading'}
+                            animate={{
+                                boxShadow: ["0 0 0px rgba(139, 92, 246, 0.4)", "0 0 20px rgba(139, 92, 246, 0.6)", "0 0 0px rgba(139, 92, 246, 0.4)"]
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             {status === 'loading' ? 'Sending...' : status === 'success' ? 'Message Sent!' : 'Send Message'}
-                        </button>
+                        </motion.button>
 
                         {status === 'error' && (
                             <p className="error-msg">Something went wrong. Please try again.</p>

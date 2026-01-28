@@ -49,6 +49,7 @@ export const publicationsData = [
         authors: "Md. Aman Uddin Siyam et al.",
         venue: "IEEE",
         link: "https://ieeexplore.ieee.org/document/11172195",
+        certificateLink: "", // Add link if available
         status: "Published"
     },
     {
@@ -56,6 +57,7 @@ export const publicationsData = [
         authors: "Md. Aman Uddin Siyam et al.",
         venue: "ICCIT",
         link: "",
+        certificateLink: "",
         status: "Accepted"
     },
     {
@@ -63,6 +65,7 @@ export const publicationsData = [
         authors: "Md. Aman Uddin Siyam et al.",
         venue: "ICCIT",
         link: "",
+        certificateLink: "",
         status: "Accepted"
     },
     {
@@ -70,46 +73,67 @@ export const publicationsData = [
         authors: "Md. Aman Uddin Siyam et al.",
         venue: "ICECTE",
         link: "",
+        certificateLink: "",
         status: "Accepted"
     }
 ];
 
-export const certificatesData = [
+export const certificateCategories = [
     {
-        title: "Computer Vision",
-        issuer: "Kaggle",
-        date: "2024",
-        link: ""
-    },
-    {
-        title: "Deep Learning",
-        issuer: "Kaggle",
-        date: "2024",
-        link: ""
-    },
-    {
-        title: "Intro to Machine Learning",
-        issuer: "Kaggle",
-        date: "2024",
-        link: ""
-    },
-    {
-        title: "Generative AI",
-        issuer: "Google Cloud",
-        date: "2024",
-        link: ""
-    },
-    {
-        title: "EDGE: Digital Skills",
+        id: "edge",
+        title: "EDGE Bangladesh",
         issuer: "EDGE",
-        date: "2024",
-        link: ""
+        description: "Comprehensive Machine Learning training program.",
+        certificates: [
+            { title: "Machine Learning with Python", date: "Nov 2024 - May 2025", link: "https://drive.google.com/file/d/1p_7yb_qTT8YCci_mIfAqYthXSkPXM-rR/view?usp=sharing" }
+        ]
     },
     {
-        title: "AI for Beginners",
-        issuer: "HP LIFE",
-        date: "2024",
-        link: ""
+        id: "kaggle",
+        title: "Kaggle Certificates",
+        issuer: "Kaggle",
+        description: "Specialized courses in Data Science and Machine Learning. (Links to Certificate Folder)",
+        certificates: [
+            { title: "Computer Vision", date: "2025", link: "https://drive.google.com/drive/folders/1iIGuBD1dVxfWvuUK3KHNo7llZDzhwogv?usp=sharing" },
+            { title: "Intro to Deep Learning", date: "2025", link: "https://drive.google.com/drive/folders/1iIGuBD1dVxfWvuUK3KHNo7llZDzhwogv?usp=sharing" },
+            { title: "Intermediate Machine Learning", date: "2025", link: "https://drive.google.com/drive/folders/1iIGuBD1dVxfWvuUK3KHNo7llZDzhwogv?usp=sharing" },
+            { title: "Intro to Machine Learning", date: "2025", link: "https://drive.google.com/drive/folders/1iIGuBD1dVxfWvuUK3KHNo7llZDzhwogv?usp=sharing" },
+            { title: "Pandas", date: "2025", link: "https://drive.google.com/drive/folders/1iIGuBD1dVxfWvuUK3KHNo7llZDzhwogv?usp=sharing" },
+            { title: "Data Visualization", date: "2025", link: "https://drive.google.com/drive/folders/1iIGuBD1dVxfWvuUK3KHNo7llZDzhwogv?usp=sharing" },
+            { title: "Python", date: "2025", link: "https://drive.google.com/drive/folders/1iIGuBD1dVxfWvuUK3KHNo7llZDzhwogv?usp=sharing" }
+        ]
+    },
+    {
+        id: "google",
+        title: "Google Cloud Skills",
+        issuer: "Google Cloud",
+        description: "Expertise in Generative AI.",
+        certificates: [
+            { title: "Introduction to Generative AI", date: "2025", link: "https://drive.google.com/file/d/17e9p6yhOeabV8u8WVm611jFAXcXEUkKu/view?usp=sharing" }
+        ]
+    },
+    {
+        id: "badges",
+        title: "Industry Badges",
+        issuer: "Google Dev",
+        description: "Recognitions from Google Developer Program and Communities.",
+        certificates: [
+            { title: "Google Cloud Innovator", date: "2026", link: "https://g.dev/amanuddinsiyam" },
+            { title: "Firebase Studio Developer", date: "2026", link: "https://g.dev/amanuddinsiyam" },
+            { title: "Google Developer Program Premium", date: "2026", link: "https://g.dev/amanuddinsiyam" },
+            { title: "NVIDIA Community Member", date: "2026", link: "https://g.dev/amanuddinsiyam" },
+            { title: "Google Maps Platform Innovator", date: "2026", link: "https://g.dev/amanuddinsiyam" }
+        ]
+    },
+    {
+        id: "others",
+        title: "Other Certifications",
+        issuer: "Various",
+        description: "Continuous learning across diverse AI/ML domains.",
+        certificates: [
+            { title: "AI for Beginners", issuer: "HP LIFE", date: "2025", link: "https://drive.google.com/file/d/1FSnrMeIKWqilYp6UyqLjxNfHzoR7PmDc/view?usp=sharing" },
+            { title: "ICPC Participation", issuer: "ICPC", date: "2024", link: "https://drive.google.com/file/d/1FSnrMeIKWqilYp6UyqLjxNfHzoR7PmDc/view?usp=sharing" }
+        ]
     }
 ];
 

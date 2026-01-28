@@ -18,9 +18,9 @@ const seedAdmin = async () => {
 
         // Create Admin
         await User.create({
-            name: 'John Doe',
-            email: 'admin@example.com',
-            password: 'password123',
+            name: 'Md. Aman Uddin Siyam',
+            email: 'amansiyam44@gmail.com',
+            password: 'password123', // Keeping simple for dev/demo, user should change
             role: 'admin'
         });
 

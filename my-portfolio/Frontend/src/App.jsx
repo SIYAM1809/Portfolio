@@ -3,20 +3,24 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 import Projects from './pages/Projects';
+import Certificates from './pages/Certificates';
 import DashboardLayout from './pages/admin/DashboardLayout';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import CursorSpotlight from './components/animations/CursorSpotlight';
+import ScrollToTop from './components/utils/ScrollToTop';
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <CursorSpotlight />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/certificates" element={<Certificates />} />
         <Route path="/login" element={<LoginPage />} />
 
         {/* Protected Admin Routes */}
@@ -49,7 +53,6 @@ const LoginPage = () => {
     setError('');
 
     try {
-      // Using fetch directly to avoid interceptor redirects
       // Using fetch directly to avoid interceptor redirects
       let rawApiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
       // Remove trailing slash if present
@@ -132,7 +135,7 @@ const LoginPage = () => {
 
       <div style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'gray', textAlign: 'center' }}>
         <p>Default Admin credentials:</p>
-        <p>Email: admin@example.com</p>
+        <p>Email: amansiyam44@gmail.com</p>
         <p>Password: password123</p>
       </div>
     </div>

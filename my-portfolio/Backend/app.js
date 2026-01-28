@@ -11,6 +11,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
+    'http://localhost:5174', // New Frontend Port
     'https://portfolio-frontend.vercel.app',
     'https://portfolio-git-main-md-aman-uddin-siyams-projects.vercel.app',
     'https://portfolio-8uz28qfu7-md-aman-uddin-siyams-projects.vercel.app',

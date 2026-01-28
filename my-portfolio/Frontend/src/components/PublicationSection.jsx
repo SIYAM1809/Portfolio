@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Reveal from './animations/Reveal';
 import { publicationsData } from '../data/portfolioData';
-import { ExternalLink, BookOpen } from 'lucide-react';
+import { ExternalLink, BookOpen, Award } from 'lucide-react';
 
 const PublicationSection = () => {
     return (
@@ -23,8 +23,8 @@ const PublicationSection = () => {
                                         <BookOpen size={24} />
                                     </div>
                                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${pub.status === 'Published'
-                                            ? 'bg-green-500/20 text-green-400'
-                                            : 'bg-yellow-500/20 text-yellow-400'
+                                        ? 'bg-green-500/20 text-green-400'
+                                        : 'bg-yellow-500/20 text-yellow-400'
                                         }`}>
                                         {pub.status}
                                     </span>
@@ -35,16 +35,28 @@ const PublicationSection = () => {
 
                                 <div className="flex justify-between items-center mt-auto">
                                     <span className="text-sm font-semibold text-primary">{pub.venue}</span>
-                                    {pub.link && (
-                                        <a
-                                            href={pub.link}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="flex items-center gap-2 text-sm text-gray-300 hover:text-primary transition-colors"
-                                        >
-                                            Read Paper <ExternalLink size={14} />
-                                        </a>
-                                    )}
+                                    <div className="flex gap-3">
+                                        {pub.certificateLink && (
+                                            <a
+                                                href={pub.certificateLink}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="flex items-center gap-2 text-sm text-gray-300 hover:text-primary transition-colors"
+                                            >
+                                                <Award size={14} /> Certificate
+                                            </a>
+                                        )}
+                                        {pub.link && (
+                                            <a
+                                                href={pub.link}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="flex items-center gap-2 text-sm text-gray-300 hover:text-primary transition-colors"
+                                            >
+                                                Read Paper <ExternalLink size={14} />
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
                             </motion.div>
                         </Reveal>
