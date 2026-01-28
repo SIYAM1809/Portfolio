@@ -1,3 +1,4 @@
+
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
@@ -7,27 +8,38 @@ import Footer from '../components/layout/Footer';
 import Reveal from '../components/animations/Reveal';
 import SEO from '../components/utils/SEO';
 import api from '../services/api';
-import { ArrowRight, Download, Code, Palette, Server, Database, Mail } from 'lucide-react';
+import { ArrowRight, Download, Code, Palette, Server, Database, Mail, MapPin } from 'lucide-react';
 import profileImage from '../assets/My-profile.jpeg';
 import './Home.css';
+import PublicationSection from '../components/PublicationSection';
+import CertificateSection from '../components/CertificateSection';
+import SkillSection from '../components/SkillSection';
+import HobbySection from '../components/HobbySection';
+import Chatbot from '../components/Chatbot';
+import { bioData } from '../data/portfolioData';
 
 const Home = () => {
     return (
         <div className="home-layout">
             <SEO
                 title="Home"
-                description="Md. Aman Uddin Siyam - Machine Learning Engineer & Full Stack Developer. Specializing in Deep Learning, Computer Vision, and MERN Stack."
+                description={bioData.shortBio}
             />
             <Navbar />
 
             <main>
                 <HeroSection />
                 <AboutSection />
+                <SkillSection />
+                <CertificateSection />
+                <PublicationSection />
                 <FeaturedProjects />
+                <HobbySection />
                 <ContactSection />
             </main>
 
             <Footer />
+            <Chatbot />
         </div>
     );
 };
@@ -43,19 +55,18 @@ const HeroSection = () => {
                     </Reveal>
                     <Reveal delay={0.1}>
                         <h1 className="hero-title">
-                            Md. Aman Uddin <span className="text-gradient">Siyam</span>
+                            {bioData.name.split(' ').slice(0, -1).join(' ')} <span className="text-gradient">{bioData.name.split(' ').slice(-1)}</span>
                         </h1>
                     </Reveal>
                     <Reveal delay={0.2}>
                         <h2 className="hero-role">
-                            Machine Learning <span className="highlight">Engineer</span> & <br />
-                            Full Stack <span className="highlight">Developer</span>
+                            {bioData.roles[0].split(' ').slice(0, -1).join(' ')} <span className="highlight">{bioData.roles[0].split(' ').slice(-1)}</span> & <br />
+                            {bioData.roles[1].split(' ').slice(0, -1).join(' ')} <span className="highlight">{bioData.roles[1].split(' ').slice(-1)}</span>
                         </h2>
                     </Reveal>
                     <Reveal delay={0.3}>
                         <p className="hero-bio">
-                            Final-year CSE student specializing in AI, Deep Learning, and Computer Vision.
-                            Building reproducible ML pipelines and production-ready web applications.
+                            {bioData.shortBio}
                         </p>
                     </Reveal>
 
@@ -64,7 +75,7 @@ const HeroSection = () => {
                             <a href="#projects" className="btn btn-primary">
                                 View Projects <ArrowRight size={18} />
                             </a>
-                            <a href="/resume.pdf" target="_blank" className="btn btn-outline">
+                            <a href="/CV_ML.pdf" target="_blank" className="btn btn-outline">
                                 Download CV <Download size={18} />
                             </a>
                         </div>
@@ -200,12 +211,6 @@ const HeroImage3D = () => {
 };
 
 const AboutSection = () => {
-    const stats = [
-        { label: 'Years Experience', value: '3+' },
-        { label: 'Research Papers', value: '3+' },
-        { label: 'Key Projects', value: '10+' },
-    ];
-
     return (
         <section className="about-section" id="about">
             <div className="container">
@@ -213,24 +218,19 @@ const AboutSection = () => {
                     <h2 className="section-title">About <span className="text-gradient">Me</span></h2>
                 </Reveal>
 
-                <div className="about-grid">
+                <div className="about-grid" style={{ gridTemplateColumns: '1fr' }}>
                     <div className="about-content">
                         <Reveal delay={0.2}>
-                            <p className="about-text">
-                                I am a final-year BSc in Computer Science & Engineering student at IUBAT with practical experience building
-                                machine learning and deep learning solutions across computer vision, biomedical signal processing, and time
-                                series tasks.
-                            </p>
-                            <p className="about-text">
-                                Skilled in end-to-end development, from data collection and preprocessing to model training and interpretability
-                                (SHAP, Grad-CAM). I'm also familiar with deploying models using Docker and FastAPI, and building full-stack
-                                web interfaces with the MERN stack.
-                            </p>
+                            {bioData.aboutText.map((paragraph, idx) => (
+                                <p key={idx} className="about-text mb-4">
+                                    {paragraph}
+                                </p>
+                            ))}
                         </Reveal>
 
                         <Reveal delay={0.4}>
-                            <div className="stats-container">
-                                {stats.map((stat, index) => (
+                            <div className="stats-container mt-8">
+                                {bioData.stats.map((stat, index) => (
                                     <div key={index} className="stat-item">
                                         <h3>{stat.value}</h3>
                                         <p>{stat.label}</p>
@@ -239,32 +239,13 @@ const AboutSection = () => {
                             </div>
                         </Reveal>
                     </div>
-
-                    <div className="tech-stack-grid">
-                        <TechCard icon={<Code />} title="Languages" skills={['Python', 'JavaScript', 'C++', 'SQL']} delay={0.2} />
-                        <TechCard icon={<Database />} title="AI & ML" skills={['TensorFlow', 'PyTorch', 'OpenCV', 'Scikit-learn']} delay={0.4} />
-                        <TechCard icon={<Server />} title="Web Dev" skills={['React', 'Node.js', 'MongoDB', 'FastAPI']} delay={0.6} />
-                        <TechCard icon={<Palette />} title="Tools" skills={['Docker', 'Git', 'Kaggle', 'Google Colab']} delay={0.8} />
-                    </div>
                 </div>
             </div>
         </section>
     );
 };
 
-const TechCard = ({ icon, title, skills, delay }) => (
-    <Reveal delay={delay}>
-        <div className="tech-card glass-card">
-            <div className="tech-icon">{icon}</div>
-            <h3>{title}</h3>
-            <div className="tech-tags">
-                {skills.map(skill => (
-                    <span key={skill} className="tech-tag">{skill}</span>
-                ))}
-            </div>
-        </div>
-    </Reveal>
-);
+
 
 const FeaturedProjects = () => {
     const [projects, setProjects] = useState([]);
@@ -390,17 +371,16 @@ const ContactSection = () => {
                     <div className="contact-info">
                         <h3>Let's work together!</h3>
                         <p>
-                            I'm currently available for freelance projects and full-time opportunities.
-                            If you have a project that needs some creative injection, let's chat.
+                            {bioData.contact.availability} If you have a project that needs some creative injection or a research collaboration, let's chat.
                         </p>
                         <div className="contact-details">
                             <div className="contact-item">
                                 <Mail className="contact-icon" />
-                                <span>amansiyam44@gmail.com</span>
+                                <span>{bioData.contact.email}</span>
                             </div>
                             <div className="contact-item">
-                                <Server className="contact-icon" />
-                                <span>Dhaka, Bangladesh</span>
+                                <MapPin className="contact-icon" />
+                                <span>{bioData.contact.location}</span>
                             </div>
                         </div>
                     </div>

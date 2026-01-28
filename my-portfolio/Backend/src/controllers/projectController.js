@@ -107,8 +107,8 @@ exports.seedProjects = async (req, res, next) => {
                 techStack: ["Python", "LlamaIndex", "Qdrant", "Docker", "CI/CD", "Groq API"],
                 imageUrl: "/rag-project.png",
                 isFeatured: true,
-                liveLink: "",
-                githubLink: "https://github.com/SIYAM1809"
+                liveLink: "https://financial-rag-analyst-sam.streamlit.app/",
+                githubLink: "https://github.com/SIYAM1809/Financial-RAG-Analyst"
             },
             {
                 title: "BAT-Track: UAV Visual Tracking",
@@ -117,7 +117,7 @@ exports.seedProjects = async (req, res, next) => {
                 imageUrl: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
                 isFeatured: true,
                 liveLink: "",
-                githubLink: "https://github.com/SIYAM1809"
+                githubLink: "https://github.com/SIYAM1809/BAT-Track-Energy--Efficient-Visual-Tracking-for-UAVs"
             },
             {
                 title: "Edge-ViT-FSL: Plant Disease Diagnosis",
@@ -125,26 +125,44 @@ exports.seedProjects = async (req, res, next) => {
                 techStack: ["Python", "TensorFlow", "MobileViT", "Few-Shot Learning", "IoT"],
                 imageUrl: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
                 isFeatured: true,
-                liveLink: "",
-                githubLink: "https://github.com/SIYAM1809"
+                liveLink: "https://siyam1809-edge-vit-disease-detect-app-xr57lq.streamlit.app/",
+                githubLink: "https://github.com/SIYAM1809/Edge-vit-disease-detect"
             },
             {
-                title: "Automated PCOS Detection",
-                description: "Engineered a Deep Learning pipeline to detect PCOS in ultrasound imaging automatically. Utilized Transfer Learning with Convolutional Neural Networks.",
+                title: "PCOS Detection (Ultrasound)",
+                description: "Automated PCOS detection from ultrasound images using Deep Learning pipelines. Utilized Transfer Learning with Convolutional Neural Networks for high accuracy diagnosis.",
                 techStack: ["Python", "Deep Learning", "CNN", "Transfer Learning", "Medical Imaging"],
                 imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
                 isFeatured: false,
                 liveLink: "",
-                githubLink: "https://github.com/SIYAM1809"
+                githubLink: "https://github.com/SIYAM1809/Ultrasound-image-PCOS"
+            },
+            {
+                title: "PCOS Detection (Tabular)",
+                description: "Machine Learning model for PCOS detection using tabular clinical data. Comparative analysis of various classifiers to determine the most effective diagnostic markers.",
+                techStack: ["Python", "Sklearn", "Pandas", "Machine Learning", "Data Analysis"],
+                imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                isFeatured: false,
+                liveLink: "",
+                githubLink: "https://github.com/SIYAM1809/Tabuler-PCOS"
+            },
+            {
+                title: "Heart Failure Prediction",
+                description: "Predictive model for heart failure risk assessment using advanced machine learning techniques on clinical datasets.",
+                techStack: ["Python", "Machine Learning", "Data Science", "Healthcare AI"],
+                imageUrl: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                isFeatured: false,
+                liveLink: "",
+                githubLink: "https://github.com/SIYAM1809/Heart-Failure-Prediction-using-Machine-Learning"
             },
             {
                 title: "Real Estate Management System",
-                description: "Built a full-stack MERN Real Estate Management System with Buyer/Seller/Admin roles and an admin approval pipeline. Implemented property CRUD, map integration, and email notifications. Deployed on Vercel and Render.",
+                description: "Full-stack MERN Real Estate Management System with Buyer/Seller/Admin roles. Implemented property CRUD, map integration, and email notifications.",
                 techStack: ["React", "Node.js", "Express", "MongoDB", "Vite"],
                 imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                isFeatured: false,
-                liveLink: "",
-                githubLink: "https://github.com/SIYAM1809"
+                isFeatured: true,
+                liveLink: "https://syntaxestate.vercel.app",
+                githubLink: "https://github.com/SIYAM1809/Real-Estate-Management-System"
             }
         ];
 
