@@ -104,15 +104,6 @@ export const certificateCategories = [
         ]
     },
     {
-        id: "google",
-        title: "Google Cloud Skills",
-        issuer: "Google Cloud",
-        description: "Expertise in Generative AI.",
-        certificates: [
-            { title: "Introduction to Generative AI", date: "2025", link: "https://drive.google.com/file/d/17e9p6yhOeabV8u8WVm611jFAXcXEUkKu/view?usp=sharing" }
-        ]
-    },
-    {
         id: "badges",
         title: "Industry Badges",
         issuer: "Google Dev",
@@ -123,6 +114,15 @@ export const certificateCategories = [
             { title: "Google Developer Program Premium", date: "2026", link: "https://g.dev/amanuddinsiyam" },
             { title: "NVIDIA Community Member", date: "2026", link: "https://g.dev/amanuddinsiyam" },
             { title: "Google Maps Platform Innovator", date: "2026", link: "https://g.dev/amanuddinsiyam" }
+        ]
+    },
+    {
+        id: "google",
+        title: "Google Cloud Skills",
+        issuer: "Google Cloud",
+        description: "Expertise in Generative AI.",
+        certificates: [
+            { title: "Introduction to Generative AI", date: "2025", link: "https://drive.google.com/file/d/17e9p6yhOeabV8u8WVm611jFAXcXEUkKu/view?usp=sharing" }
         ]
     },
     {

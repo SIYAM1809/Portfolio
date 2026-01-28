@@ -9,6 +9,7 @@ const Chatbot = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([]);
+    const [inputValue, setInputValue] = useState('');
     const messagesEndRef = useRef(null);
 
     // Initialize greeting when data loads
@@ -36,6 +37,28 @@ const Chatbot = () => {
         }, 500);
     };
 
+    const handleSend = (e) => {
+        e.preventDefault();
+        if (!inputValue.trim()) return;
+
+        // Add user message
+        setMessages(prev => [...prev, { type: 'user', text: inputValue }]);
+        const userText = inputValue;
+        setInputValue('');
+
+        // Simulate typing delay & simple response matching
+        setTimeout(() => {
+            const lowerInput = userText.toLowerCase();
+            const matchedFaq = chatbotData?.faqs?.find(faq =>
+                lowerInput.includes(faq.question.toLowerCase()) ||
+                faq.question.toLowerCase().includes(lowerInput)
+            );
+
+            const responseText = matchedFaq ? matchedFaq.answer : "Thanks for your message! I'll get back to you soon.";
+            setMessages(prev => [...prev, { type: 'bot', text: responseText }]);
+        }, 500);
+    };
+
     if (!chatbotData) return null; // Don't render if no data
 
     return (
@@ -45,10 +68,10 @@ const Chatbot = () => {
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="fixed bottom-6 right-6 z-50 p-4 bg-primary rounded-full shadow-lg shadow-primary/20 text-black font-bold flex items-center justify-center group"
-                onClick={() => setIsOpen(true)}
+                className="fixed bottom-6 right-6 z-50 p-4 bg-[#00D9FF] rounded-full shadow-lg shadow-[#00D9FF]/20 text-black font-bold flex items-center justify-center group"
+                onClick={() => setIsOpen(!isOpen)}
             >
-                <div className="absolute inset-0 rounded-full animate-ping bg-primary opacity-20 group-hover:opacity-40"></div>
+                <div className="absolute inset-0 rounded-full animate-ping bg-[#00D9FF] opacity-20 group-hover:opacity-40"></div>
                 {!isOpen ? <MessageSquare size={24} /> : <X size={24} />}
             </motion.button>
 
@@ -58,10 +81,10 @@ const Chatbot = () => {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] glass-card flex flex-col z-50 overflow-hidden border border-primary/20 shadow-2xl"
+                        className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] glass-card flex flex-col z-50 overflow-hidden border border-[#00D9FF]/20 shadow-2xl"
                     >
                         {/* Header */}
-                        <div className="p-4 bg-primary/10 border-b border-white/10 flex justify-between items-center">
+                        <div className="p-4 bg-[#00D9FF]/10 border-b border-white/10 flex justify-between items-center">
                             <div className="flex items-center gap-2">
                                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                                 <h3 className="font-bold text-white">Siyam's Assistant</h3>
@@ -84,7 +107,7 @@ const Chatbot = () => {
                                     className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
                                 >
                                     <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.type === 'user'
-                                        ? 'bg-primary text-black rounded-tr-none'
+                                        ? 'bg-[#00D9FF] text-black rounded-tr-none'
                                         : 'bg-white/10 text-gray-200 rounded-tl-none'
                                         }`}>
                                         {msg.text}
@@ -95,19 +118,42 @@ const Chatbot = () => {
                         </div>
 
                         {/* Quick Options */}
+                        {/* Quick Options */}
                         <div className="p-4 border-t border-white/10 bg-black/20">
-                            <p className="text-xs text-gray-500 mb-2 font-medium">Suggested Questions:</p>
-                            <div className="flex flex-wrap gap-2">
-                                {chatbotData.faqs.map((faq, idx) => (
-                                    <button
-                                        key={idx}
-                                        onClick={() => handleQuestionClick(faq.question, faq.answer)}
-                                        className="text-xs px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-primary/20 hover:border-primary/50 text-gray-300 hover:text-primary transition-colors text-left"
-                                    >
-                                        {faq.question}
-                                    </button>
-                                ))}
-                            </div>
+                            {chatbotData.faqs && chatbotData.faqs.length > 0 && (
+                                <div className="mb-3">
+                                    <p className="text-xs text-gray-500 mb-2 font-medium">Suggested Questions:</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {chatbotData.faqs.map((faq, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => handleQuestionClick(faq.question, faq.answer)}
+                                                className="text-xs px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-[#00D9FF]/20 hover:border-[#00D9FF]/50 text-gray-300 hover:text-[#00D9FF] transition-colors text-left"
+                                            >
+                                                {faq.question}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Input Area */}
+                            <form onSubmit={handleSend} className="flex gap-2">
+                                <input
+                                    type="text"
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    placeholder="Type a message..."
+                                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#00D9FF]/50 placeholder-gray-500"
+                                />
+                                <button
+                                    type="submit"
+                                    className="p-2 bg-[#00D9FF] text-black rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                                    disabled={!inputValue.trim()}
+                                >
+                                    <Send size={18} />
+                                </button>
+                            </form>
                         </div>
                     </motion.div>
                 )}
