@@ -144,11 +144,297 @@ const ContentManager = () => {
                     </div>
                 )}
 
-                {/* Placeholder for other sections */}
-                {(activeSection === 'publications' || activeSection === 'certificates' || activeSection === 'hobbies') && (
-                    <div className="text-center py-10 text-gray-400">
-                        <p>Editor for {activeSection} coming soon!</p>
-                        <p className="text-sm mt-2">(You can already edit Bio and Skills fully)</p>
+                {activeSection === 'publications' && (
+                    <div className="space-y-6">
+                        {localData.publicationsData.map((pub, idx) => (
+                            <div key={idx} className="p-6 bg-black/20 rounded-lg border border-white/5 relative group">
+                                <button
+                                    onClick={() => {
+                                        const newData = [...localData.publicationsData];
+                                        newData.splice(idx, 1);
+                                        setLocalData({ ...localData, publicationsData: newData });
+                                    }}
+                                    className="absolute top-4 right-4 text-gray-500 hover:text-red-400 transition-colors"
+                                >
+                                    <Trash2 size={18} />
+                                </button>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="md:col-span-2">
+                                        <label className="block text-xs font-medium text-gray-400 mb-1">Title</label>
+                                        <input
+                                            type="text"
+                                            value={pub.title}
+                                            onChange={(e) => {
+                                                const newData = [...localData.publicationsData];
+                                                newData[idx].title = e.target.value;
+                                                setLocalData({ ...localData, publicationsData: newData });
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-primary focus:outline-none"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-gray-400 mb-1">Authors</label>
+                                        <input
+                                            type="text"
+                                            value={pub.authors}
+                                            onChange={(e) => {
+                                                const newData = [...localData.publicationsData];
+                                                newData[idx].authors = e.target.value;
+                                                setLocalData({ ...localData, publicationsData: newData });
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-primary focus:outline-none"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-gray-400 mb-1">Venue</label>
+                                        <input
+                                            type="text"
+                                            value={pub.venue}
+                                            onChange={(e) => {
+                                                const newData = [...localData.publicationsData];
+                                                newData[idx].venue = e.target.value;
+                                                setLocalData({ ...localData, publicationsData: newData });
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-primary focus:outline-none"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-gray-400 mb-1">Paper Link</label>
+                                        <input
+                                            type="text"
+                                            value={pub.link}
+                                            onChange={(e) => {
+                                                const newData = [...localData.publicationsData];
+                                                newData[idx].link = e.target.value;
+                                                setLocalData({ ...localData, publicationsData: newData });
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-primary focus:outline-none"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-gray-400 mb-1">Status</label>
+                                        <select
+                                            value={pub.status}
+                                            onChange={(e) => {
+                                                const newData = [...localData.publicationsData];
+                                                newData[idx].status = e.target.value;
+                                                setLocalData({ ...localData, publicationsData: newData });
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-primary focus:outline-none"
+                                        >
+                                            <option value="Published">Published</option>
+                                            <option value="Accepted">Accepted</option>
+                                            <option value="Under Review">Under Review</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
+                        <button
+                            onClick={() => {
+                                const newPub = {
+                                    title: "New Publication",
+                                    authors: "Md. Aman Uddin Siyam, ...",
+                                    venue: "Conference/Journal Name",
+                                    link: "",
+                                    certificateLink: "",
+                                    status: "Published"
+                                };
+                                setLocalData({ ...localData, publicationsData: [...localData.publicationsData, newPub] });
+                            }}
+                            className="w-full py-3 border-2 border-dashed border-white/10 rounded-xl text-gray-400 hover:text-white hover:border-primary/50 hover:bg-primary/5 transition-all flex items-center justify-center gap-2"
+                        >
+                            <Plus size={20} /> Add Publication
+                        </button>
+                    </div>
+                )}
+
+                {activeSection === 'certificates' && (
+                    <div className="space-y-8">
+                        {localData.certificateCategories.map((category, idx) => (
+                            <div key={idx} className="p-6 bg-black/20 rounded-lg border border-white/5 relative group">
+                                <button
+                                    onClick={() => {
+                                        const newData = [...localData.certificateCategories];
+                                        newData.splice(idx, 1);
+                                        setLocalData({ ...localData, certificateCategories: newData });
+                                    }}
+                                    className="absolute top-4 right-4 text-gray-500 hover:text-red-400 transition-colors"
+                                >
+                                    <Trash2 size={18} />
+                                </button>
+
+                                <div className="mb-6 space-y-4">
+                                    <h3 className="text-xl font-bold text-white mb-2">Category {idx + 1}</h3>
+                                    <div>
+                                        <label className="block text-xs font-medium text-gray-400 mb-1">Category Title</label>
+                                        <input
+                                            type="text"
+                                            value={category.title}
+                                            onChange={(e) => {
+                                                const newData = [...localData.certificateCategories];
+                                                newData[idx].title = e.target.value;
+                                                setLocalData({ ...localData, certificateCategories: newData });
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-primary focus:outline-none"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-gray-400 mb-1">Description</label>
+                                        <input
+                                            type="text"
+                                            value={category.description}
+                                            onChange={(e) => {
+                                                const newData = [...localData.certificateCategories];
+                                                newData[idx].description = e.target.value;
+                                                setLocalData({ ...localData, certificateCategories: newData });
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-primary focus:outline-none"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4 pl-4 border-l-2 border-white/5">
+                                    <h4 className="text-sm font-bold text-gray-300">Certificates in this Category</h4>
+                                    {category.certificates.map((cert, cIdx) => (
+                                        <div key={cIdx} className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center bg-white/5 p-3 rounded-lg relative group/cert">
+                                            <input
+                                                type="text"
+                                                placeholder="Certificate Title"
+                                                value={cert.title}
+                                                onChange={(e) => {
+                                                    const newData = [...localData.certificateCategories];
+                                                    newData[idx].certificates[cIdx].title = e.target.value;
+                                                    setLocalData({ ...localData, certificateCategories: newData });
+                                                }}
+                                                className="bg-black/30 border border-white/10 rounded p-1 text-sm text-white focus:border-primary focus:outline-none"
+                                            />
+                                            <input
+                                                type="text"
+                                                placeholder="Date (e.g. 2024)"
+                                                value={cert.date}
+                                                onChange={(e) => {
+                                                    const newData = [...localData.certificateCategories];
+                                                    newData[idx].certificates[cIdx].date = e.target.value;
+                                                    setLocalData({ ...localData, certificateCategories: newData });
+                                                }}
+                                                className="bg-black/30 border border-white/10 rounded p-1 text-sm text-white focus:border-primary focus:outline-none"
+                                            />
+                                            <div className="flex gap-2">
+                                                <input
+                                                    type="text"
+                                                    placeholder="Link (Optional)"
+                                                    value={cert.link}
+                                                    onChange={(e) => {
+                                                        const newData = [...localData.certificateCategories];
+                                                        newData[idx].certificates[cIdx].link = e.target.value;
+                                                        setLocalData({ ...localData, certificateCategories: newData });
+                                                    }}
+                                                    className="w-full bg-black/30 border border-white/10 rounded p-1 text-sm text-white focus:border-primary focus:outline-none"
+                                                />
+                                                <button
+                                                    onClick={() => {
+                                                        const newData = [...localData.certificateCategories];
+                                                        newData[idx].certificates.splice(cIdx, 1);
+                                                        setLocalData({ ...localData, certificateCategories: newData });
+                                                    }}
+                                                    className="text-red-400 hover:text-red-300"
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    <button
+                                        onClick={() => {
+                                            const newData = [...localData.certificateCategories];
+                                            newData[idx].certificates.push({ title: "New Certificate", date: "2024", link: "" });
+                                            setLocalData({ ...localData, certificateCategories: newData });
+                                        }}
+                                        className="text-xs px-3 py-1 bg-primary/20 text-primary rounded hover:bg-primary/30 transition-colors flex items-center gap-1"
+                                    >
+                                        <Plus size={14} /> Add Certificate
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+
+                        <button
+                            onClick={() => {
+                                const newCat = {
+                                    id: "new-category",
+                                    title: "New Category",
+                                    issuer: "Issuer Name",
+                                    description: "Category Description",
+                                    certificates: []
+                                };
+                                setLocalData({ ...localData, certificateCategories: [...localData.certificateCategories, newCat] });
+                            }}
+                            className="w-full py-3 border-2 border-dashed border-white/10 rounded-xl text-gray-400 hover:text-white hover:border-primary/50 hover:bg-primary/5 transition-all flex items-center justify-center gap-2"
+                        >
+                            <Plus size={20} /> Add Category
+                        </button>
+                    </div>
+                )}
+
+                {activeSection === 'hobbies' && (
+                    <div className="space-y-6">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {localData.hobbiesData.map((hobby, idx) => (
+                                <div key={idx} className="p-4 bg-black/20 rounded-lg border border-white/5 relative group text-center">
+                                    <button
+                                        onClick={() => {
+                                            const newData = [...localData.hobbiesData];
+                                            newData.splice(idx, 1);
+                                            setLocalData({ ...localData, hobbiesData: newData });
+                                        }}
+                                        className="absolute top-2 right-2 text-gray-500 hover:text-red-400 transition-colors"
+                                    >
+                                        <Trash2 size={14} />
+                                    </button>
+
+                                    <div className="mb-2">
+                                        <input
+                                            type="text"
+                                            value={hobby.icon}
+                                            onChange={(e) => {
+                                                const newData = [...localData.hobbiesData];
+                                                newData[idx].icon = e.target.value;
+                                                setLocalData({ ...localData, hobbiesData: newData });
+                                            }}
+                                            className="w-12 h-12 text-center text-2xl bg-black/30 border border-white/10 rounded-lg p-1 text-white focus:border-primary focus:outline-none mx-auto block"
+                                            placeholder="🏏"
+                                        />
+                                        <span className="text-xs text-gray-500 mt-1 block">Emoji</span>
+                                    </div>
+
+                                    <input
+                                        type="text"
+                                        value={hobby.name}
+                                        onChange={(e) => {
+                                            const newData = [...localData.hobbiesData];
+                                            newData[idx].name = e.target.value;
+                                            setLocalData({ ...localData, hobbiesData: newData });
+                                        }}
+                                        className="w-full bg-black/30 border border-white/10 rounded p-1 text-sm text-center text-white focus:border-primary focus:outline-none"
+                                        placeholder="Hobby Name"
+                                    />
+                                </div>
+                            ))}
+
+                            <button
+                                onClick={() => {
+                                    const newHobby = { name: "New Hobby", icon: "✨" };
+                                    setLocalData({ ...localData, hobbiesData: [...localData.hobbiesData, newHobby] });
+                                }}
+                                className="p-4 border-2 border-dashed border-white/10 rounded-lg text-gray-400 hover:text-white hover:border-primary/50 hover:bg-primary/5 transition-all flex flex-col items-center justify-center gap-2 h-full min-h-[140px]"
+                            >
+                                <Plus size={24} />
+                                <span className="text-sm">Add Hobby</span>
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
