@@ -25,10 +25,17 @@ exports.protect = async (req, res, next) => {
         // 3) Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        // 4) Attach user to request object for downstream use
-        req.user = decoded;
+        // 4) Check if user still exists
+        const currentUser = await require('../models/User').findById(decoded.id);
+        if (!currentUser) {
+            return res.status(401).json({
+                status: 'fail',
+                message: 'The user belonging to this token no longer does exist.'
+            });
+        }
 
         // 5) Grant access to protected route
+        req.user = currentUser;
         next();
     } catch (error) {
         // Handle JWT-specific errors
