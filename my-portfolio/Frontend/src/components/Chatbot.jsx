@@ -43,18 +43,68 @@ const Chatbot = () => {
 
         // Add user message
         setMessages(prev => [...prev, { type: 'user', text: inputValue }]);
-        const userText = inputValue;
+        const userText = inputValue.toLowerCase();
         setInputValue('');
 
-        // Simulate typing delay & simple response matching
+        // Simulate typing delay & intelligent response
         setTimeout(() => {
-            const lowerInput = userText.toLowerCase();
+            let responseText = "";
+
+            // 1. Check FAQs first (Exact or partial match)
             const matchedFaq = chatbotData?.faqs?.find(faq =>
-                lowerInput.includes(faq.question.toLowerCase()) ||
-                faq.question.toLowerCase().includes(lowerInput)
+                userText.includes(faq.question.toLowerCase()) ||
+                faq.question.toLowerCase().includes(userText)
             );
 
-            const responseText = matchedFaq ? matchedFaq.answer : "Thanks for your message! I'll get back to you soon.";
+            if (matchedFaq) {
+                responseText = matchedFaq.answer;
+            } else {
+                // 2. Keyword Matching through Portfolio Data
+
+                // --- Bio / About ---
+                if (userText.includes('who') || userText.includes('about') || userText.includes('bio') || userText.includes('yourself') || userText.includes('name')) {
+                    responseText = portfolioData?.bioData?.shortBio || portfolioData?.bioData?.aboutText?.[0] || "I am Siyam, a Machine Learning Engineer and Full Stack Developer.";
+                }
+
+                // --- Contact / Hire ---
+                else if (userText.includes('contact') || userText.includes('email') || userText.includes('hire') || userText.includes('job') || userText.includes('reach')) {
+                    responseText = `You can reach Siyam at ${portfolioData?.bioData?.contact?.email || 'his email'}. He is currently ${portfolioData?.bioData?.contact?.availability || 'available'}.`;
+                }
+
+                // --- Skills / Tech Stack ---
+                else if (userText.includes('skill') || userText.includes('tech') || userText.includes('stack') || userText.includes('program') || userText.includes('language') || userText.includes('react') || userText.includes('python')) {
+                    const allSkills = portfolioData?.skillsData?.flatMap(s => s.skills).join(', ');
+                    responseText = `Siyam is proficient in: ${allSkills}.`;
+                }
+
+                // --- Publications / Research ---
+                else if (userText.includes('paper') || userText.includes('research') || userText.includes('publication') || userText.includes('article') || userText.includes('thesis')) {
+                    const papers = portfolioData?.publicationsData?.map(p => p.title).join('; ');
+                    responseText = `Here are some of his key publications: ${papers}.`;
+                }
+
+                // --- Certifications / Learning ---
+                else if (userText.includes('certificat') || userText.includes('course') || userText.includes('bagde') || userText.includes('learning')) {
+                    responseText = "Siyam has certifications from EDGE, Kaggle, and Google Cloud, covering Machine Learning, Deep Learning, and Generative AI.";
+                }
+
+                // --- Hobbies ---
+                else if (userText.includes('hobby') || userText.includes('interest') || userText.includes('like') || userText.includes('cricket')) {
+                    const hobbies = portfolioData?.hobbiesData?.map(h => h.name).join(', ');
+                    responseText = `In his free time, Siyam enjoys: ${hobbies}.`;
+                }
+
+                // --- Projects (Generic fallback if no specific project data in context) ---
+                else if (userText.includes('project') || userText.includes('built') || userText.includes('work')) {
+                    responseText = "Siyam has worked on over 10 key projects involving Medical Imaging, Reproducible ML pipelines, and Full Stack Web Apps. Check out the Projects section!";
+                }
+
+                // --- Fallback ---
+                else {
+                    responseText = "I think you are out of the context, please ask relevent question";
+                }
+            }
+
             setMessages(prev => [...prev, { type: 'bot', text: responseText }]);
         }, 500);
     };
