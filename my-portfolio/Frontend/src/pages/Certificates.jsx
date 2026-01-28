@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft, Award, ExternalLink, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { certificateCategories } from '../data/portfolioData.jsx';
+import { usePortfolio } from '../context/PortfolioContext';
 import Reveal from '../components/animations/Reveal';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
@@ -9,6 +9,9 @@ import SEO from '../components/utils/SEO';
 import ScrollToTop from '../components/utils/ScrollToTop';
 
 const Certificates = () => {
+    const { portfolioData } = usePortfolio();
+    const certificateCategories = portfolioData?.certificateCategories || [];
+
     return (
         <div className="min-h-screen bg-background text-text-primary">
             <SEO title="Certificates" />

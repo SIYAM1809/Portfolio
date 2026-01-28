@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion';
 import Reveal from './animations/Reveal';
-import { hobbiesData } from '../data/portfolioData.jsx';
+import { usePortfolio } from '../context/PortfolioContext';
 
 const HobbySection = () => {
+    const { portfolioData } = usePortfolio();
+    const hobbiesData = portfolioData?.hobbiesData || [];
+
+    if (hobbiesData.length === 0) return null;
+
     return (
         <section id="hobbies" className="py-20 bg-black/20">
             <div className="container mx-auto px-4">

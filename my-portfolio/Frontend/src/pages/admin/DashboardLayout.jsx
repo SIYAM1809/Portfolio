@@ -14,14 +14,16 @@ import {
     Eye,
     Search,
     Filter,
-    RefreshCw
+    RefreshCw,
+    FileText
 } from 'lucide-react';
 import ProjectForm from './ProjectForm';
 import api from '../../services/api';
 import './DashboardLayout.css';
+import ContentManager from './ContentManager';
 
 const DashboardLayout = () => {
-    const [activeTab, setActiveTab] = useState('projects'); // 'projects' | 'messages' | 'overview'
+    const [activeTab, setActiveTab] = useState('projects'); // 'projects' | 'messages' | 'overview' | 'content'
     const [projects, setProjects] = useState([]);
     const [messages, setMessages] = useState([]);
     const [showProjectForm, setShowProjectForm] = useState(false);
@@ -39,7 +41,6 @@ const DashboardLayout = () => {
         try {
             if (activeTab === 'projects') {
                 const response = await api.get('/projects');
-                // Handle different response structures: data.projects or data.data.projects
                 const data = response.data.data || response.data;
                 setProjects(Array.isArray(data) ? data : (data.projects || []));
             } else if (activeTab === 'messages') {
@@ -49,7 +50,6 @@ const DashboardLayout = () => {
             }
         } catch (error) {
             console.error('Error fetching data:', error);
-            // On error, keep empty arrays to prevent crashes
             setProjects([]);
             setMessages([]);
         } finally {
@@ -101,9 +101,9 @@ const DashboardLayout = () => {
 
         setLoading(true);
         try {
-            await api.post('/projects/seed'); // Uses the token from api interceptor
+            await api.post('/projects/seed');
             alert('Database reset successfully!');
-            fetchData(); // Refresh list
+            fetchData();
         } catch (error) {
             console.error('Error seeding database:', error);
             alert('Failed to reset database: ' + (error.response?.data?.message || error.message));
@@ -112,10 +112,8 @@ const DashboardLayout = () => {
         }
     };
 
-    // Get unique tech stacks for filtering
     const allTechStacks = [...new Set(projects.flatMap(p => p.techStack || []))];
 
-    // Filter projects
     const filteredProjects = projects.filter(project => {
         const matchesSearch = project.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             project.description?.toLowerCase().includes(searchQuery.toLowerCase());
@@ -150,6 +148,14 @@ const DashboardLayout = () => {
                         <FolderKanban size={20} />
                         <span>Projects</span>
                         <span className="badge">{projects.length}</span>
+                    </button>
+
+                    <button
+                        onClick={() => setActiveTab('content')}
+                        className={`nav-item ${activeTab === 'content' ? 'active' : ''}`}
+                    >
+                        <FileText size={20} />
+                        <span>Content</span>
                     </button>
 
                     <button
@@ -271,7 +277,6 @@ const DashboardLayout = () => {
                                         </button>
                                     </div>
 
-                                    {/* Search and Filter */}
                                     <div className="filter-bar">
                                         <div className="search-box">
                                             <Search size={20} />
@@ -297,7 +302,6 @@ const DashboardLayout = () => {
                                         </div>
                                     </div>
 
-                                    {/* Projects Grid */}
                                     {loading ? (
                                         <div className="loading-state">Loading projects...</div>
                                     ) : filteredProjects.length === 0 ? (
@@ -319,6 +323,11 @@ const DashboardLayout = () => {
                                         </div>
                                     )}
                                 </div>
+                            )}
+
+                            {/* Content Manager Tab */}
+                            {activeTab === 'content' && (
+                                <ContentManager />
                             )}
 
                             {/* Messages Tab */}

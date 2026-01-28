@@ -16,10 +16,16 @@ import CertificateSection from '../components/CertificateSection';
 import SkillSection from '../components/SkillSection';
 import HobbySection from '../components/HobbySection';
 import Chatbot from '../components/Chatbot';
-import { bioData } from '../data/portfolioData.jsx';
+import { usePortfolio } from '../context/PortfolioContext';
 
 const Home = () => {
-    if (!bioData) return <div className="min-h-screen flex items-center justify-center text-white">Loading configuration...</div>;
+    const { portfolioData } = usePortfolio();
+
+    // Safety check - if data is missing (not yet fetched or error), wait or show loader
+    // The Context handles fallback, but we need to check if portfolioData itself exists
+    if (!portfolioData || !portfolioData.bioData) return <div className="min-h-screen flex items-center justify-center text-white">Loading configuration...</div>;
+
+    const { bioData } = portfolioData;
 
     return (
         <div className="home-layout">
@@ -30,14 +36,14 @@ const Home = () => {
             <Navbar />
 
             <main>
-                <HeroSection />
-                <AboutSection />
+                <HeroSection bioData={bioData} />
+                <AboutSection bioData={bioData} />
                 <SkillSection />
                 <CertificateSection />
                 <PublicationSection />
                 <FeaturedProjects />
                 <HobbySection />
-                <ContactSection />
+                <ContactSection bioData={bioData} />
             </main>
 
             <Footer />
@@ -46,7 +52,7 @@ const Home = () => {
     );
 };
 
-const HeroSection = () => {
+const HeroSection = ({ bioData }) => {
     return (
         <section className="hero-section" id="home">
             <div className="container hero-container">
@@ -212,7 +218,7 @@ const HeroImage3D = () => {
     );
 };
 
-const AboutSection = () => {
+const AboutSection = ({ bioData }) => {
     return (
         <section className="about-section" id="about">
             <div className="container">
@@ -355,7 +361,7 @@ const ProjectCard = ({ project, index }) => (
     </Reveal>
 );
 
-const ContactSection = () => {
+const ContactSection = ({ bioData }) => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [status, setStatus] = useState('idle'); // idle, loading, success, error
 

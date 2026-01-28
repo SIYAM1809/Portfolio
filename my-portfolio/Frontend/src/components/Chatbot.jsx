@@ -1,14 +1,22 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send } from 'lucide-react';
-import { chatbotData } from '../data/portfolioData.jsx';
+import { usePortfolio } from '../context/PortfolioContext';
 
 const Chatbot = () => {
+    const { portfolioData } = usePortfolio();
+    const chatbotData = portfolioData?.chatbotData;
+
     const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState([
-        { type: 'bot', text: chatbotData.greeting }
-    ]);
+    const [messages, setMessages] = useState([]);
     const messagesEndRef = useRef(null);
+
+    // Initialize greeting when data loads
+    useEffect(() => {
+        if (chatbotData?.greeting && messages.length === 0) {
+            setMessages([{ type: 'bot', text: chatbotData.greeting }]);
+        }
+    }, [chatbotData]);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -27,6 +35,8 @@ const Chatbot = () => {
             setMessages(prev => [...prev, { type: 'bot', text: answer }]);
         }, 500);
     };
+
+    if (!chatbotData) return null; // Don't render if no data
 
     return (
         <>

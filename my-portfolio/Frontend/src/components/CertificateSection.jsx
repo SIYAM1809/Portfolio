@@ -1,12 +1,19 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Reveal from './animations/Reveal';
-import { certificateCategories } from '../data/portfolioData.jsx';
+import { usePortfolio } from '../context/PortfolioContext';
 import { Award, ExternalLink } from 'lucide-react';
 
 const CertificateSection = () => {
+    const { portfolioData } = usePortfolio();
+
+    // Safety check - if no data yet, use empty array or return null (or skeleton)
+    const certificateCategories = portfolioData?.certificateCategories || [];
+
     // Show top 3 categories as highlights
     const highlights = certificateCategories.slice(0, 3);
+
+    if (certificateCategories.length === 0) return null; // Or return loading skeleton
 
     return (
         <section id="certificates" className="py-20 bg-black/20">

@@ -4,35 +4,15 @@ const globalErrorHandler = require('./src/middleware/errorMiddleware');
 const projectRouter = require('./src/routes/projectRoutes');
 const authRouter = require('./src/routes/authRoutes');
 const messageRouter = require('./src/routes/messageRoutes');
+const portfolioRouter = require('./src/routes/portfolioRoutes');
 
-const app = express();
-
-// Middleware
-app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:5174', // New Frontend Port
-    'https://portfolio-frontend.vercel.app',
-    'https://portfolio-git-main-md-aman-uddin-siyams-projects.vercel.app',
-    'https://portfolio-8uz28qfu7-md-aman-uddin-siyams-projects.vercel.app',
-    'https://portfolio-md-aman-uddin-siyams-projects.vercel.app',
-    'https://portfolio-sable-kappa-71.vercel.app',
-    'https://aman-uddin-siyam-portfolio.vercel.app'
-  ],
-  credentials: true
-}));
-app.use(express.json());
-
-// Debug Middleware
-app.use((req, res, next) => {
-  console.log(`[DEBUG] Request: ${req.method} ${req.originalUrl}`);
-  next();
-});
+// ...
 
 console.log('[DEBUG] Mounting auth routes...');
 app.use('/api/projects', projectRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/messages', messageRouter);
+app.use('/api/portfolio', portfolioRouter);
 
 // Routes (We will link these next)
 app.get('/', (req, res) => {

@@ -1,9 +1,16 @@
 import { motion } from 'framer-motion';
 import Reveal from './animations/Reveal';
-import { publicationsData } from '../data/portfolioData.jsx';
+import { usePortfolio } from '../context/PortfolioContext';
 import { ExternalLink, BookOpen, Award } from 'lucide-react';
 
 const PublicationSection = () => {
+    const { portfolioData } = usePortfolio();
+
+    // Safety fallback
+    const publicationsData = portfolioData?.publicationsData || [];
+
+    if (publicationsData.length === 0) return null;
+
     return (
         <section id="publications" className="py-20">
             <div className="container mx-auto px-4">

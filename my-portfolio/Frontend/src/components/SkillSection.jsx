@@ -1,8 +1,25 @@
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import Reveal from './animations/Reveal';
-import { skillsData } from '../data/portfolioData.jsx';
+import { usePortfolio } from '../context/PortfolioContext';
+import { Code, Database, Server, Palette, Terminal, Cpu, Globe, Brain } from 'lucide-react';
+
+const iconMap = {
+    "Code": <Code size={24} />,
+    "Brain": <Brain size={24} />,
+    "Globe": <Globe size={24} />,
+    "Terminal": <Terminal size={24} />,
+    "Database": <Database size={24} />,
+    "Server": <Server size={24} />,
+    "Palette": <Palette size={24} />,
+    "Cpu": <Cpu size={24} />
+};
 
 const SkillSection = () => {
+    const { portfolioData } = usePortfolio();
+
+    // If no data, use empty array or handle loading
+    const skillsData = portfolioData?.skillsData || [];
+
     return (
         <section id="skills" className="py-20">
             <div className="container mx-auto px-4">
@@ -30,6 +47,9 @@ const SpotlightCard = ({ category, idx }) => {
         mouseX.set(clientX - left);
         mouseY.set(clientY - top);
     }
+
+    // Get icon from map based on string name, or default to generic if missing
+    const IconComponent = iconMap[category.icon] || <Code size={24} />;
 
     return (
         <div
@@ -60,7 +80,7 @@ const SpotlightCard = ({ category, idx }) => {
                                     className="text-primary p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"
                                     whileHover={{ rotate: 15, scale: 1.1 }}
                                 >
-                                    {category.icon}
+                                    {IconComponent}
                                 </motion.div>
                                 <h3 className="text-xl font-bold text-white relative z-10">{category.category}</h3>
                             </div>
