@@ -11,8 +11,17 @@ export const usePortfolio = () => {
 };
 
 export const PortfolioProvider = ({ children }) => {
-    const [portfolioData, setPortfolioData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    // Initialize with static data for instant first paint.
+    // The API call below will silently replace this with live data once the backend responds.
+    const [portfolioData, setPortfolioData] = useState({
+        bioData: staticBio,
+        skillsData: staticSkills,
+        publicationsData: staticPubs,
+        certificateCategories: staticCerts,
+        hobbiesData: staticHobbies,
+        chatbotData: staticChatbot
+    });
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const fetchPortfolioData = async () => {

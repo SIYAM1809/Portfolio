@@ -1,41 +1,63 @@
-import { useState } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './pages/Home';
-import ProjectDetails from './pages/ProjectDetails';
-import Projects from './pages/Projects';
-import Certificates from './pages/Certificates';
-import DashboardLayout from './pages/admin/DashboardLayout';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import CursorSpotlight from './components/animations/CursorSpotlight';
 import ScrollToTop from './components/utils/ScrollToTop';
 import './App.css';
 
+// Lazy-loaded pages — JS for each page is only downloaded when first visited
+const Home = lazy(() => import('./pages/Home'));
+const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
+const Projects = lazy(() => import('./pages/Projects'));
+const Certificates = lazy(() => import('./pages/Certificates'));
+const DashboardLayout = lazy(() => import('./pages/admin/DashboardLayout'));
+
+// Minimal loading fallback shown during lazy chunk download
+const PageLoader = () => (
+  <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0a0a0a' }}>
+    <div style={{ width: 40, height: 40, border: '3px solid rgba(0,217,255,0.2)', borderTop: '3px solid #00D9FF', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+    <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+  </div>
+);
+
 function App() {
+  // Fix: Keep backend warm — prevents Render.com free-tier cold starts (5–10s delay)
+  // Pings the /health endpoint every 14 minutes (Render sleeps after 15 min of inactivity)
+  useEffect(() => {
+    const apiBase = import.meta.env.VITE_API_URL?.replace(/\/api$/, '') || 'http://localhost:5000';
+    const ping = () => fetch(`${apiBase}/health`, { method: 'GET' }).catch(() => { });
+    ping(); // ping immediately on page load
+    const interval = setInterval(ping, 14 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />
       <CursorSpotlight />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/projects/:id" element={<ProjectDetails />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/certificates" element={<Certificates />} />
-        <Route path="/login" element={<LoginPage />} />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/projects/:id" element={<ProjectDetails />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/certificates" element={<Certificates />} />
+          <Route path="/login" element={<LoginPage />} />
 
-        {/* Protected Admin Routes */}
-        <Route
-          path="/admin/*"
-          element={
-            <ProtectedRoute>
-              <DashboardLayout />
-            </ProtectedRoute>
-          }
-        />
+          {/* Protected Admin Routes */}
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
