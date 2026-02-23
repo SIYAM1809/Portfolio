@@ -472,6 +472,12 @@ textarea.neon-input {
     }
 }
 
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .mt-2 {
     margin-top: 0.5rem;
 }

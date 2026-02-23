@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Upload, Image as ImageIcon, Sparkles, Trash2 } from 'lucide-react';
 import api from '../../services/api';
@@ -32,6 +32,8 @@ const ProjectForm = ({ projectToEdit = null, onSuccess, onCancel }) => {
     const [error, setError] = useState('');
     const [imagePreview, setImagePreview] = useState('');
     const [dragActive, setDragActive] = useState(false);
+    const [uploadingImage, setUploadingImage] = useState(false);
+    const fileInputRef = useRef(null);
 
     // Populate form if editing
     useEffect(() => {
@@ -98,17 +100,47 @@ const ProjectForm = ({ projectToEdit = null, onSuccess, onCancel }) => {
         }
     };
 
+    // Read an image File object and set it as the preview + formData.imageUrl
+    const processImageFile = (file) => {
+        if (!file || !file.type.startsWith('image/')) {
+            setError('Please select a valid image file (JPG, PNG, WebP, GIF).');
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+            setError('Image must be smaller than 5 MB.');
+            return;
+        }
+        setError('');
+        setUploadingImage(true);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const dataUrl = reader.result;
+            setImagePreview(dataUrl);
+            setFormData(prev => ({ ...prev, imageUrl: dataUrl }));
+            setUploadingImage(false);
+        };
+        reader.onerror = () => {
+            setError('Failed to read image file.');
+            setUploadingImage(false);
+        };
+        reader.readAsDataURL(file);
+    };
+
     const handleDrop = (e) => {
         e.preventDefault();
         e.stopPropagation();
         setDragActive(false);
-
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            // Handle file upload (you'd implement actual upload logic here)
-            console.log('File dropped:', e.dataTransfer.files[0]);
-            // For now, we'll use a placeholder
-            alert('File upload feature - integrate with your storage solution (Cloudinary, S3, etc.)');
+            processImageFile(e.dataTransfer.files[0]);
         }
+    };
+
+    const handleFileInputChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            processImageFile(e.target.files[0]);
+        }
+        // Reset input so same file can be re-selected
+        e.target.value = '';
     };
 
     const handleSubmit = async (e) => {
@@ -222,19 +254,36 @@ const ProjectForm = ({ projectToEdit = null, onSuccess, onCancel }) => {
                         Project Image
                     </label>
 
+                    {/* Hidden native file input — triggered by clicking the dropzone */}
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp,image/gif"
+                        style={{ display: 'none' }}
+                        onChange={handleFileInputChange}
+                    />
+
                     <div
                         className={`image-dropzone ${dragActive ? 'drag-active' : ''}`}
                         onDragEnter={handleDrag}
                         onDragLeave={handleDrag}
                         onDragOver={handleDrag}
                         onDrop={handleDrop}
+                        onClick={() => !imagePreview && fileInputRef.current?.click()}
+                        style={{ cursor: imagePreview ? 'default' : 'pointer' }}
                     >
-                        {imagePreview ? (
+                        {uploadingImage ? (
+                            <div className="dropzone-content">
+                                <div style={{ width: 36, height: 36, border: '3px solid rgba(0,217,255,0.2)', borderTop: '3px solid #00D9FF', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                                <p>Reading image...</p>
+                            </div>
+                        ) : imagePreview ? (
                             <div className="image-preview-container">
                                 <img src={imagePreview} alt="Preview" className="image-preview" />
                                 <button
                                     type="button"
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                        e.stopPropagation();
                                         setImagePreview('');
                                         setFormData(prev => ({ ...prev, imageUrl: '' }));
                                     }}
@@ -246,8 +295,8 @@ const ProjectForm = ({ projectToEdit = null, onSuccess, onCancel }) => {
                         ) : (
                             <div className="dropzone-content">
                                 <Upload size={40} />
-                                <p>Drag & drop an image, or click to select</p>
-                                <span className="dropzone-hint">Supports: JPG, PNG, WebP</span>
+                                <p>Click to select or drag & drop an image</p>
+                                <span className="dropzone-hint">Supports: JPG, PNG, WebP · Max 5 MB</span>
                             </div>
                         )}
                     </div>
