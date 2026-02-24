@@ -155,11 +155,7 @@ const LoginPage = () => {
         </button>
       </form>
 
-      <div style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'gray', textAlign: 'center' }}>
-        <p>Default Admin credentials:</p>
-        <p>Email: amansiyam44@gmail.com</p>
-        <p>Password: password123</p>
-      </div>
+
     </div>
   );
 };
