@@ -91,13 +91,11 @@ const HeroSection = ({ bioData }) => {
                                 </button>
                                 <div className="cv-dropdown-menu">
                                     <a href="/CV_ML.pdf" download="Siyam_ML_CV.pdf" className="cv-dropdown-item">
-                                        <Brain size={16} />
-                                        <span>ML / AI Research CV</span>
+                                        <span>AI/ML CV</span>
                                         <Download size={14} className="cv-dl-icon" />
                                     </a>
                                     <a href="/Siyam_Dev.pdf" download="Siyam_Dev_CV.pdf" className="cv-dropdown-item">
-                                        <Globe size={16} />
-                                        <span>Full Stack Dev CV</span>
+                                        <span>Full Stack CV</span>
                                         <Download size={14} className="cv-dl-icon" />
                                     </a>
                                 </div>
