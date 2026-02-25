@@ -118,7 +118,7 @@ body {
   box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
 }
 
-/* CV Download Dropdown */
+/* CV Download Dropdown — hover triggered */
 .cv-dropdown-wrapper {
   position: relative;
   display: inline-block;
@@ -128,7 +128,7 @@ body {
   position: absolute;
   top: calc(100% + 8px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-4px);
   background: rgba(10, 10, 30, 0.97);
   border: 1px solid rgba(0, 217, 255, 0.3);
   border-radius: 12px;
@@ -137,19 +137,23 @@ body {
   z-index: 100;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 217, 255, 0.1);
   backdrop-filter: blur(12px);
-  animation: dropdownFade 0.18s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-@keyframes dropdownFade {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-6px);
-  }
+.cv-dropdown-wrapper:hover .cv-dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
 
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+.cv-dropdown-wrapper:hover .cv-chevron {
+  transform: rotate(180deg);
+}
+
+.cv-chevron {
+  transition: transform 0.2s ease;
 }
 
 .cv-dropdown-item {

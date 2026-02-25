@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-const Reveal = ({ children, width = "fit-content", delay = 0 }) => {
+const Reveal = ({ children, width = "fit-content", delay = 0, className = "", overflow = "hidden" }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
 
     return (
-        <div ref={ref} style={{ position: 'relative', width, overflow: 'hidden' }}>
+        <div ref={ref} className={className} style={{ position: 'relative', width, overflow }}>
             <motion.div
                 variants={{
                     hidden: { opacity: 0, y: 75 },
