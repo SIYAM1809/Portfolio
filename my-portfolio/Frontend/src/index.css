@@ -118,6 +118,71 @@ body {
   box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
 }
 
+/* CV Download Dropdown */
+.cv-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cv-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 10, 30, 0.97);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 12px;
+  min-width: 220px;
+  overflow: hidden;
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 217, 255, 0.1);
+  backdrop-filter: blur(12px);
+  animation: dropdownFade 0.18s ease;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.cv-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.2rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+
+.cv-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.cv-dropdown-item:hover {
+  background: rgba(0, 217, 255, 0.1);
+  color: var(--primary-cyan);
+}
+
+.cv-dropdown-item .cv-dl-icon {
+  margin-left: auto;
+  opacity: 0.5;
+}
+
+.cv-dropdown-item:hover .cv-dl-icon {
+  opacity: 1;
+}
+
 h1,
 h2,
 h3,

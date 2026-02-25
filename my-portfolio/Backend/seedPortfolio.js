@@ -13,27 +13,30 @@ const seedData = async () => {
             bioData: {
                 name: "Md. Aman Uddin Siyam",
                 roles: ["Machine Learning Engineer", "Full Stack Developer"],
-                shortBio: "Final-year BSc in CSE student specializing in AI, Deep Learning, and Computer Vision. Building reproducible ML pipelines and production-ready web applications.",
+                shortBio: "BSc CSE candidate (all coursework completed, available immediately) — I architect production ML pipelines and the full-stack applications that ship them.",
                 aboutText: [
-                    "I am a final-year BSc in Computer Science & Engineering student at IUBAT with practical experience building machine learning and deep learning solutions across computer vision, biomedical signal processing, and time series tasks.",
-                    "My research interests include Agri-Tech, Medical Imaging, and Reproducible ML. I am skilled in end-to-end development, from data collection and preprocessing to model training and interpretability (SHAP, Grad-CAM)."
+                    "I am a final-year BSc in Computer Science & Engineering student at IUBAT with a proven track record of publishing peer-reviewed ML benchmarks and architecting end-to-end deep learning systems across computer vision, biomedical signal processing, and time-series forecasting. Past work spans edge-optimized UAV trackers, few-shot crop disease models, and a live Financial RAG Analyst built on LlamaIndex, Qdrant, and Llama 3.",
+                    "On the engineering side, I specialize in production-ready MERN stack applications — role-based access control, REST APIs, Stripe integrations, Docker containerization, and multi-stage GitHub Actions CI/CD. I bridge the gap between AI research and deployment: from training a calibrated ensemble that hits AUROC 0.976, to containerizing it behind a FastAPI endpoint and shipping it live."
                 ],
                 stats: [
-                    { label: 'Key Projects', value: '10+' },
+                    { label: 'Key Projects', value: '8+' },
                     { label: 'Certifications', value: '8+' },
                     { label: 'Publications', value: '4+' },
                 ],
                 contact: {
                     email: "amansiyam44@gmail.com",
+                    phone: "+8801304054566",
                     location: "Dhaka, Bangladesh",
-                    availability: "Available for full-time opportunities"
+                    availability: "Available immediately — open to full-time & internships"
                 }
             },
             skillsData: [
-                { category: "Languages", skills: ["Python", "JavaScript", "C++", "SQL"], icon: "Code" },
-                { category: "AI & ML", skills: ["TensorFlow", "PyTorch", "OpenCV", "Scikit-learn", "XGBoost", "SVM"], icon: "Brain" },
-                { category: "Web Development", skills: ["React", "Node.js", "Express", "MongoDB", "FastAPI"], icon: "Globe" },
-                { category: "Tools & DevOps", skills: ["Docker", "Git", "GitHub Actions", "Google Colab"], icon: "Terminal" }
+                { category: "Languages", skills: ["Python", "JavaScript", "Java", "C/C++", "SQL"], icon: "Code" },
+                { category: "AI / ML & CV", skills: ["TensorFlow/Keras", "PyTorch", "OpenCV", "scikit-learn", "XGBoost", "LightGBM", "CatBoost", "Grad-CAM", "SHAP", "Transfer Learning"], icon: "Brain" },
+                { category: "Signal & Data", skills: ["Biomedical Signal Processing", "Feature Extraction", "LSTM", "ARIMA", "Prophet", "PCA", "Survival Analysis", "EDA", "Feature Engineering"], icon: "Cpu" },
+                { category: "Web Dev (MERN)", skills: ["React", "Redux Toolkit", "Node.js", "Express.js", "MongoDB", "Mongoose", "FastAPI", "Flask", "REST APIs", "JWT Auth"], icon: "Globe" },
+                { category: "MLOps & DevOps", skills: ["Docker", "GitHub Actions", "Weights & Biases (W&B)", "Streamlit", "Vercel", "Render", "Reproducible Pipelines", "Experiment Logging"], icon: "Terminal" },
+                { category: "APIs & Tools", skills: ["Stripe API", "Google Maps API", "Nodemailer", "Multer", "LlamaIndex", "Qdrant", "Cloudinary", "Postman", "Git/GitHub", "Google Colab"], icon: "Database" }
             ],
             certificateCategories: [
                 {
@@ -133,10 +136,13 @@ const seedData = async () => {
                 { name: "Chess", icon: "♟️" }
             ],
             chatbotData: {
-                greeting: "Hi! I'm Siyam's AI Assistant. Ask me anything about his work!",
+                greeting: "Hi! I'm Siyam's AI Assistant. Ask me anything about his skills, projects, or availability!",
                 faqs: [
-                    { question: "What is your tech stack?", answer: "Siyam works primarily with Python (PyTorch, TensorFlow) for AI/ML and the MERN stack (MongoDB, Express, React, Node.js) for web development." },
-                    { question: "Are you available for hire?", answer: "Yes! Siyam is currently looking for full-time opportunities in Machine Learning or Full Stack Development." }
+                    { question: "What is your ML / AI tech stack?", answer: "TensorFlow/Keras, PyTorch, OpenCV, scikit-learn, XGBoost, LightGBM, CatBoost — with MLOps tooling: Docker, FastAPI, Weights & Biases (W&B), and reproducible pipeline design. For GenAI/RAG: LlamaIndex, Qdrant, Groq (Llama 3)." },
+                    { question: "What is your web dev / full-stack tech stack?", answer: "Full MERN stack — React 19 (Vite), Redux Toolkit, Node.js, Express.js, MongoDB/Mongoose. APIs: JWT auth, Stripe, Google Maps, Nodemailer, Cloudinary, Multer. DevOps: Docker, GitHub Actions CI/CD, Vercel & Render deployments." },
+                    { question: "Are you available for hire?", answer: "Yes! BSc coursework is fully completed and Siyam is available immediately for full-time roles or internships in ML Engineering, MLOps, or Full-Stack Development. Based in Dhaka, Bangladesh." },
+                    { question: "What are your research publications?", answer: "4 publications: (1) Voice-Based Parkinson's Detection — SVM & XGBoost (Published, IEEE). (2) PCOS Detection Benchmark (Accepted, ICCIT). (3) Cosmetic Chemical Carcinogenicity ML Pipeline (Accepted, ICCIT). (4) LENS-Guard — Hybrid VAE-CNN (Accepted, ICECTE)." },
+                    { question: "How can I contact you?", answer: "Email: amansiyam44@gmail.com | Phone: +8801304054566 | LinkedIn: linkedin.com/in/amansiyam18 | GitHub: github.com/SIYAM1809" }
                 ]
             }
         };
