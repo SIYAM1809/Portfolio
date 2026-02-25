@@ -184,34 +184,6 @@ const HeroImage3D = () => {
                     style={{ transform: "translateZ(50px)" }}
                 />
 
-                <motion.div
-                    className="floating-badge badge-top"
-                    style={{ z: 75 }}
-                    animate={{ y: [0, -15, 0] }}
-                    transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
-                >
-                    <Code size={20} />
-                    <span>AI Researcher</span>
-                </motion.div>
-
-                <motion.div
-                    className="floating-badge badge-bottom"
-                    style={{ z: 75 }}
-                    animate={{ y: [0, -15, 0] }}
-                    transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 2
-                    }}
-                >
-                    <Palette size={20} />
-                    <span>Full Stack</span>
-                </motion.div>
             </motion.div>
             <div className="hero-glow"></div>
         </motion.div>
