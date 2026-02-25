@@ -15,6 +15,7 @@ const projects = [
         imageUrl: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=800&q=80",
         githubLink: "https://github.com/SIYAM1809/BAT-Track-Energy--Efficient-Visual-Tracking-for-UAVs",
         liveLink: "https://www.youtube.com/watch?v=fJssBVbzK2k&list=PL1P_EUgZHtr8kFKtBGO_jtpbcaViNsh85&index=2",
+        category: 'ML & AI',
         isFeatured: true,
         markdown: `## Overview
 BAT-Track is an energy-efficient visual tracking system designed for resource-constrained UAVs. It solves the core challenge of maintaining high tracking accuracy while dramatically reducing power consumption — critical for extending drone flight time in real-world deployments.
@@ -36,6 +37,7 @@ BAT-Track is an energy-efficient visual tracking system designed for resource-co
         imageUrl: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80",
         githubLink: "https://github.com/SIYAM1809/Edge-vit-disease-detect",
         liveLink: "https://siyam1809-edge-vit-disease-detect-app-xr57lq.streamlit.app/",
+        category: 'ML & AI',
         isFeatured: true,
         markdown: `## Overview
 Edge-ViT-FSL is a few-shot learning system for cross-domain plant disease diagnosis, designed to run on IoT edge devices with severe memory and compute constraints. The system can identify plant pathologies in real-world environments using as few as 5 training images per disease class.
@@ -58,6 +60,7 @@ Edge-ViT-FSL is a few-shot learning system for cross-domain plant disease diagno
         imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
         githubLink: "https://github.com/SIYAM1809/Financial-RAG-Analyst",
         liveLink: "https://financial-rag-analyst-sam.streamlit.app/",
+        category: 'ML & AI',
         isFeatured: true,
         markdown: `## Overview
 Financial RAG Analyst is a production-grade Retrieval-Augmented Generation system built to ingest, index, and analyze SEC 10-K annual filings for major tech companies (Apple, Microsoft, Google). It enables natural language financial analysis across hundreds of pages of regulatory documents.
@@ -79,6 +82,7 @@ LlamaIndex · Qdrant · Llama 3 (Groq API) · LlamaParse · Docker · GitHub Act
         imageUrl: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&q=80",
         githubLink: "https://github.com/SIYAM1809/Ultrasound-image-PCOS",
         liveLink: "",
+        category: 'ML & AI',
         isFeatured: true,
         markdown: `## Overview
 A rigorous, reproducible benchmark study comparing two fundamentally different approaches to PCOS (Polycystic Ovary Syndrome) detection: a clinical tabular ensemble vs. a deep learning ultrasound image pipeline. Accepted at **ICCIT 2025**.
@@ -104,6 +108,7 @@ A rigorous, reproducible benchmark study comparing two fundamentally different a
         imageUrl: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=800&q=80",
         githubLink: "https://github.com/SIYAM1809/Pet-Shop-Management-System",
         liveLink: "https://siyams-praniseba.vercel.app",
+        category: 'Full Stack',
         isFeatured: true,
         markdown: `## Overview
 A production-grade pet shop operations platform built for professional business use. Designed with a clear separation between Admin and Staff roles, with full CRUD operations across all business entities.
@@ -125,6 +130,7 @@ MERN Stack · JWT Auth · bcrypt · Recharts · Nodemailer · Docker · GitHub A
         imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
         githubLink: "https://github.com/SIYAM1809/Portfolio",
         liveLink: "https://aman-uddin-siyam-portfolio.vercel.app",
+        category: 'Full Stack',
         isFeatured: false,
         markdown: `## Overview
 This portfolio itself — a full-stack application showcasing dual expertise in ML/AI and Full Stack development. Built with a decoupled architecture: React 19 frontend on Vercel, Express.js backend on Render.
@@ -145,6 +151,7 @@ React 19 (Vite) · TailwindCSS 4 · Framer Motion · Express.js REST API · Mong
         imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
         githubLink: "https://github.com/SIYAM1809/Real-Estate-Management-System",
         liveLink: "https://syntaxestate.vercel.app",
+        category: 'Full Stack',
         isFeatured: true,
         markdown: `## Overview
 A full-featured real estate marketplace with three distinct user roles (Buyer, Seller, Admin), complete content moderation workflows, and enterprise-grade security logging.

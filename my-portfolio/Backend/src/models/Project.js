@@ -13,6 +13,7 @@ const projectSchema = new mongoose.Schema({
     imageUrl: { type: String },
     liveLink: { type: String },
     githubLink: { type: String },
+    category: { type: String, enum: ['ML & AI', 'Full Stack'], default: 'Full Stack' },
     isFeatured: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now }
 });
