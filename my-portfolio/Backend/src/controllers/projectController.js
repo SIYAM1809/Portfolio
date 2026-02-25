@@ -108,6 +108,7 @@ exports.seedProjects = async (req, res, next) => {
                 imageUrl: "/rag-project.png",
                 isFeatured: true,
                 liveLink: "https://financial-rag-analyst-sam.streamlit.app/",
+                videoLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
                 githubLink: "https://github.com/SIYAM1809/Financial-RAG-Analyst"
             },
             {

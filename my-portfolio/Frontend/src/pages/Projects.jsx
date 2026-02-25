@@ -6,7 +6,7 @@ import SEO from '../components/utils/SEO';
 import api from '../services/api';
 import { ArrowRight, Brain, Globe } from 'lucide-react';
 import Reveal from '../components/animations/Reveal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Projects.css';
 
 const TABS = [
@@ -104,46 +104,53 @@ const Projects = () => {
     );
 };
 
-const ProjectCard = ({ project, index }) => (
-    <Reveal delay={index * 0.08} width="100%">
-        <motion.div
-            className="project-card-public glass-card"
-            whileHover={{ y: -10 }}
-        >
-            {/* Category badge */}
-            {project.category && (
-                <span className={`project-category-badge ${project.category === 'ML & AI' ? 'badge-ml' : 'badge-fs'}`}>
-                    {project.category === 'ML & AI' ? <Brain size={11} /> : <Globe size={11} />}
-                    {project.category}
-                </span>
-            )}
+const ProjectCard = ({ project, index }) => {
+    const navigate = useNavigate();
+    return (
+        <Reveal delay={index * 0.08} width="100%">
+            <motion.div
+                className="project-card-public glass-card cursor-pointer"
+                whileHover={{ y: -10 }}
+                onClick={(e) => {
+                    if (e.target.closest('a') !== null) return;
+                    navigate(`/projects/${project._id}`);
+                }}
+            >
+                {/* Category badge */}
+                {project.category && (
+                    <span className={`project-category-badge ${project.category === 'ML & AI' ? 'badge-ml' : 'badge-fs'}`}>
+                        {project.category === 'ML & AI' ? <Brain size={11} /> : <Globe size={11} />}
+                        {project.category}
+                    </span>
+                )}
 
-            <div className="project-image-container">
-                <img
-                    src={project.imageUrl || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80'}
-                    alt={project.title}
-                    className="project-img"
-                />
-                <div className="project-overlay">
-                    <div className="project-links">
-                        <Link to={`/projects/${project._id}`} className="icon-btn" aria-label="View Details">
-                            <ArrowRight size={20} />
-                        </Link>
+                <div className="project-image-container">
+                    <img
+                        src={project.imageUrl || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80'}
+                        alt={project.title}
+                        className="project-img"
+                    />
+                    <div className="project-overlay">
+                        <div className="project-links">
+                            <Link to={`/projects/${project._id}`} className="icon-btn" aria-label="View Details">
+                                <ArrowRight size={20} />
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-desc">{project.description?.substring(0, 110)}...</p>
-                <div className="project-tech-stack">
-                    {project.techStack?.slice(0, 4).map(tech => (
-                        <span key={tech} className="tech-badge">{tech}</span>
-                    ))}
+                <div className="project-content">
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-desc">{project.description?.substring(0, 110)}...</p>
+                    <div className="project-tech-stack">
+                        {project.techStack?.slice(0, 4).map(tech => (
+                            <span key={tech} className="tech-badge">{tech}</span>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </motion.div>
-    </Reveal>
-);
+            </motion.div>
+        </Reveal>
+    );
+};
 
 export default Projects;

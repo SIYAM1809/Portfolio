@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'react-markdown';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Github, ExternalLink, Calendar, Code2 } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, Calendar, Code2, Youtube } from 'lucide-react';
 import api from '../services/api';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
@@ -110,10 +110,10 @@ const ProjectDetails = () => {
                 {/* Content Layout */}
                 <div className="details-grid">
                     {/* Left Column: Markdown Content */}
-                    <div className="details-content glass-card">
-                        <ReactMarkdown className="markdown-body">
+                    <div className="details-content glass-card markdown-body">
+                        <Markdown>
                             {project.markdown || project.description || 'No additional details provided.'}
-                        </ReactMarkdown>
+                        </Markdown>
                     </div>
 
                     {/* Right Column: Sidebar Info */}
@@ -124,6 +124,11 @@ const ProjectDetails = () => {
                                 {project.liveLink && (
                                     <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary full-width">
                                         Visit Live Site <ExternalLink size={16} />
+                                    </a>
+                                )}
+                                {project.videoLink && (
+                                    <a href={project.videoLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline full-width">
+                                        Watch Video <Youtube size={16} />
                                     </a>
                                 )}
                                 {project.githubLink && (

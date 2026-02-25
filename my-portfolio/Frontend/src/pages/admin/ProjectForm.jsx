@@ -21,6 +21,7 @@ const ProjectForm = ({ projectToEdit = null, onSuccess, onCancel }) => {
         techStack: [],
         imageUrl: '',
         liveLink: '',
+        videoLink: '',
         githubLink: '',
         isFeatured: false,
         markdown: '' // For detailed case study
@@ -44,6 +45,7 @@ const ProjectForm = ({ projectToEdit = null, onSuccess, onCancel }) => {
                 techStack: projectToEdit.techStack || [],
                 imageUrl: projectToEdit.imageUrl || '',
                 liveLink: projectToEdit.liveLink || '',
+                videoLink: projectToEdit.videoLink || '',
                 githubLink: projectToEdit.githubLink || '',
                 isFeatured: projectToEdit.isFeatured || false,
                 markdown: projectToEdit.markdown || ''
@@ -423,6 +425,21 @@ const ProjectForm = ({ projectToEdit = null, onSuccess, onCancel }) => {
                             onChange={handleInputChange}
                             className="neon-input"
                             placeholder="https://github.com/..."
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="videoLink" className="form-label">
+                            Video Link (YouTube/Vimeo)
+                        </label>
+                        <input
+                            type="url"
+                            id="videoLink"
+                            name="videoLink"
+                            value={formData.videoLink}
+                            onChange={handleInputChange}
+                            className="neon-input"
+                            placeholder="https://youtube.com/..."
                         />
                     </div>
                 </div>

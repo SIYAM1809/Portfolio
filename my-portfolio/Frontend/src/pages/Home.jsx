@@ -2,13 +2,13 @@
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import Reveal from '../components/animations/Reveal';
 import SEO from '../components/utils/SEO';
 import api from '../services/api';
-import { ArrowRight, Download, Code, Palette, Server, Database, Mail, MapPin, Brain, Globe, ChevronDown, Phone } from 'lucide-react';
+import { ArrowRight, Download, Code, Palette, Server, Database, Mail, MapPin, Brain, Globe, ChevronDown, Phone, ExternalLink } from 'lucide-react';
 import profileImage from '../assets/My-profile.jpeg';
 import './Home.css';
 import PublicationSection from '../components/PublicationSection';
@@ -306,46 +306,62 @@ const FeaturedProjects = () => {
     );
 };
 
-const ProjectCard = ({ project, index }) => (
-    <Reveal delay={index * 0.2}>
-        <motion.div
-            className="project-card-public glass-card"
-            whileHover={{ y: -10 }}
-        >
-            <div className="project-image-container">
-                <img
-                    src={project.imageUrl || 'https://via.placeholder.com/600x400/1a0a2e/00d9ff?text=Project+Preview'}
-                    alt={project.title}
-                    className="project-img"
-                />
-                <div className="project-overlay">
-                    <div className="project-links">
-                        {project.githubLink && (
-                            <a href={project.githubLink} target="_blank" rel="noreferrer" className="icon-btn" aria-label="GitHub">
-                                <Code size={20} />
-                            </a>
-                        )}
-                        {project.liveLink && (
-                            <a href={project.liveLink} target="_blank" rel="noreferrer" className="icon-btn" aria-label="Live Demo">
+const ProjectCard = ({ project, index }) => {
+    const navigate = useNavigate();
+    return (
+        <Reveal delay={index * 0.1}>
+            <motion.div
+                className="project-card-public glass-card cursor-pointer"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                whileHover={{ y: -10 }}
+                onClick={(e) => {
+                    if (e.target.closest('a') !== null) return;
+                    navigate(`/projects/${project._id}`);
+                }}
+            >
+                <div className="project-image-container">
+                    <img
+                        src={project.imageUrl || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80'}
+                        alt={project.title}
+                        className="project-img"
+                    />
+                    <div className="project-overlay">
+                        <div className="project-links">
+                            {/* View Detail Page */}
+                            <Link to={`/projects/${project._id}`} className="icon-btn" aria-label="View Details">
                                 <ArrowRight size={20} />
-                            </a>
-                        )}
+                            </Link>
+                            {/* GitHub */}
+                            {project.githubLink && (
+                                <a href={project.githubLink} target="_blank" rel="noreferrer" className="icon-btn" aria-label="GitHub">
+                                    <Code size={20} />
+                                </a>
+                            )}
+                            {/* Live Site */}
+                            {project.liveLink && (
+                                <a href={project.liveLink} target="_blank" rel="noreferrer" className="icon-btn" aria-label="Live Demo">
+                                    <ExternalLink size={20} />
+                                </a>
+                            )}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-desc">{project.description}</p>
-                <div className="project-tech-stack">
-                    {project.techStack?.slice(0, 4).map(tech => (
-                        <span key={tech} className="tech-badge">{tech}</span>
-                    ))}
+                <div className="project-content">
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-desc">{project.description}</p>
+                    <div className="project-tech-stack">
+                        {project.techStack?.slice(0, 4).map(tech => (
+                            <span key={tech} className="tech-badge">{tech}</span>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </motion.div>
-    </Reveal>
-);
+            </motion.div>
+        </Reveal>
+    );
+};
 
 const ContactSection = ({ bioData }) => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });

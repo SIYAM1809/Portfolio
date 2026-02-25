@@ -15,7 +15,8 @@ import {
     Search,
     Filter,
     RefreshCw,
-    FileText
+    FileText,
+    Youtube
 } from 'lucide-react';
 import ProjectForm from './ProjectForm';
 import api from '../../services/api';
@@ -416,6 +417,11 @@ const ProjectCard = ({ project, onEdit, onDelete }) => (
                 {project.liveLink && (
                     <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="link-btn">
                         <ExternalLink size={16} />
+                    </a>
+                )}
+                {project.videoLink && (
+                    <a href={project.videoLink} target="_blank" rel="noopener noreferrer" className="link-btn">
+                        <Youtube size={16} />
                     </a>
                 )}
                 {project.githubLink && (
