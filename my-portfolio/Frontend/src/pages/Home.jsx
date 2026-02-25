@@ -8,7 +8,7 @@ import Footer from '../components/layout/Footer';
 import Reveal from '../components/animations/Reveal';
 import SEO from '../components/utils/SEO';
 import api from '../services/api';
-import { ArrowRight, Download, Code, Palette, Server, Database, Mail, MapPin, Brain, Globe, ChevronDown } from 'lucide-react';
+import { ArrowRight, Download, Code, Palette, Server, Database, Mail, MapPin, Brain, Globe, ChevronDown, Phone } from 'lucide-react';
 import profileImage from '../assets/My-profile.jpeg';
 import './Home.css';
 import PublicationSection from '../components/PublicationSection';
@@ -386,6 +386,12 @@ const ContactSection = ({ bioData }) => {
                                 <Mail className="contact-icon" />
                                 <span>{bioData.contact.email}</span>
                             </div>
+                            {bioData.contact.phone && (
+                                <div className="contact-item">
+                                    <Phone className="contact-icon" />
+                                    <span>{bioData.contact.phone}</span>
+                                </div>
+                            )}
                             <div className="contact-item">
                                 <MapPin className="contact-icon" />
                                 <span>{bioData.contact.location}</span>
