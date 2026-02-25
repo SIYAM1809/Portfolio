@@ -93,47 +93,45 @@ const HeroSection = ({ bioData }) => {
                     </Reveal>
 
                     <Reveal delay={0.4}>
-                        <div className="hero-cta">
-                            <a href="#projects" className="btn btn-primary">
-                                View Projects <ArrowRight size={18} />
-                            </a>
-
-                            {/* CV Download Dropdown */}
-                            <div className="cv-dropdown-wrapper" ref={cvRef}>
-                                <button
-                                    className="btn btn-outline"
-                                    onClick={() => setCvOpen(prev => !prev)}
-                                    aria-expanded={cvOpen}
-                                >
-                                    Download CV <ChevronDown size={16} style={{ transition: 'transform 0.2s', transform: cvOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-                                </button>
-                                {cvOpen && (
-                                    <div className="cv-dropdown-menu">
-                                        <a
-                                            href="/CV_ML.pdf"
-                                            download="Siyam_ML_CV.pdf"
-                                            className="cv-dropdown-item"
-                                            onClick={() => setCvOpen(false)}
-                                        >
-                                            <Brain size={16} />
-                                            <span>ML / AI Research CV</span>
-                                            <Download size={14} className="cv-dl-icon" />
-                                        </a>
-                                        <a
-                                            href="/Siyam_Dev.pdf"
-                                            download="Siyam_Dev_CV.pdf"
-                                            className="cv-dropdown-item"
-                                            onClick={() => setCvOpen(false)}
-                                        >
-                                            <Globe size={16} />
-                                            <span>Full Stack Dev CV</span>
-                                            <Download size={14} className="cv-dl-icon" />
-                                        </a>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
+                        <a href="#projects" className="btn btn-primary">
+                            View Projects <ArrowRight size={18} />
+                        </a>
                     </Reveal>
+
+                    {/* CV Download Dropdown — outside Reveal to avoid overflow:hidden clipping */}
+                    <div className="cv-dropdown-wrapper" ref={cvRef}>
+                        <button
+                            className="btn btn-outline"
+                            onClick={() => setCvOpen(prev => !prev)}
+                            aria-expanded={cvOpen}
+                        >
+                            Download CV <ChevronDown size={16} style={{ transition: 'transform 0.2s', transform: cvOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                        </button>
+                        {cvOpen && (
+                            <div className="cv-dropdown-menu">
+                                <a
+                                    href="/CV_ML.pdf"
+                                    download="Siyam_ML_CV.pdf"
+                                    className="cv-dropdown-item"
+                                    onClick={() => setCvOpen(false)}
+                                >
+                                    <Brain size={16} />
+                                    <span>ML / AI Research CV</span>
+                                    <Download size={14} className="cv-dl-icon" />
+                                </a>
+                                <a
+                                    href="/Siyam_Dev.pdf"
+                                    download="Siyam_Dev_CV.pdf"
+                                    className="cv-dropdown-item"
+                                    onClick={() => setCvOpen(false)}
+                                >
+                                    <Globe size={16} />
+                                    <span>Full Stack Dev CV</span>
+                                    <Download size={14} className="cv-dl-icon" />
+                                </a>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 <HeroImage3D />
