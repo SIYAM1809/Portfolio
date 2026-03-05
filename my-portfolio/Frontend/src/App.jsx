@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import CursorSpotlight from './components/animations/CursorSpotlight';
 import ScrollToTop from './components/utils/ScrollToTop';
+import DeviceToggle from './components/utils/DeviceToggle';
 import './App.css';
 
 // Lazy-loaded pages — JS for each page is only downloaded when first visited
@@ -21,6 +22,8 @@ const PageLoader = () => (
 );
 
 function App() {
+  const [viewMode, setViewMode] = useState('desktop');
+
   // Fix: Keep backend warm — prevents Render.com free-tier cold starts (5–10s delay)
   // Pings the /health endpoint every 14 minutes (Render sleeps after 15 min of inactivity)
   useEffect(() => {
@@ -34,30 +37,34 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <CursorSpotlight />
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/projects/:id" element={<ProjectDetails />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/certificates" element={<Certificates />} />
-          <Route path="/login" element={<LoginPage />} />
+      {viewMode === 'desktop' && <CursorSpotlight />}
+      <DeviceToggle mode={viewMode} setMode={setViewMode} />
 
-          {/* Protected Admin Routes */}
-          <Route
-            path="/admin/*"
-            element={
-              <ProtectedRoute>
-                <DashboardLayout />
-              </ProtectedRoute>
-            }
-          />
+      <div className={`app-wrapper ${viewMode === 'mobile' ? 'mobile-preview-mode' : ''}`}>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/projects/:id" element={<ProjectDetails />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/certificates" element={<Certificates />} />
+            <Route path="/login" element={<LoginPage />} />
 
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Suspense>
+            {/* Protected Admin Routes */}
+            <Route
+              path="/admin/*"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Fallback */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
+      </div>
     </Router>
   );
 }

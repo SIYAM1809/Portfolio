@@ -5,6 +5,7 @@ const projectRouter = require('./src/routes/projectRoutes');
 const authRouter = require('./src/routes/authRoutes');
 const messageRouter = require('./src/routes/messageRoutes');
 const portfolioRouter = require('./src/routes/portfolioRoutes');
+const chatbotRouter = require('./src/routes/chatbotRoutes');
 
 // ...
 
@@ -20,6 +21,7 @@ app.use('/api/projects', projectRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/messages', messageRouter);
 app.use('/api/portfolio', portfolioRouter);
+app.use('/api/chatbot', chatbotRouter);
 
 // Routes (We will link these next)
 app.get('/', (req, res) => {

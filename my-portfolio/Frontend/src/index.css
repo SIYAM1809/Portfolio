@@ -85,6 +85,12 @@ body {
   padding: 0 2rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
 /* Button Styles */
 .btn {
   padding: 0.8rem 1.5rem;

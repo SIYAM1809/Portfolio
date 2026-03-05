@@ -94,6 +94,8 @@
 .hero-cta {
     display: flex;
     gap: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .hero-cta .btn {
@@ -291,6 +293,8 @@
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
     line-height: 1.7;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .stats-container {
@@ -477,6 +481,8 @@
 
 .project-links {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
     transform: translateY(20px);
     transition: transform 0.3s ease;
@@ -762,9 +768,62 @@ textarea.input-field {
 
     .stats-container {
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    .stat-item {
+        text-align: center;
+        min-width: 120px;
     }
 
     .tech-stack-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        padding-top: 100px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-role {
+        font-size: 1.4rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-bio {
+        font-size: 1rem;
+    }
+
+    .hero-image-card {
+        width: 280px;
+        height: 350px;
+    }
+
+    .badge-top,
+    .badge-bottom {
+        display: none;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .about-section,
+    .projects-section,
+    .contact-section {
+        padding: 4rem 0;
+    }
+
+    .stat-item h3 {
+        font-size: 2rem;
     }
 }

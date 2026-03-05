@@ -85,6 +85,7 @@ const Navbar = () => {
                                     key={link.title}
                                     href={link.path}
                                     className="mobile-link"
+                                    onClick={() => setIsOpen(false)}
                                 >
                                     {link.title}
                                 </a>

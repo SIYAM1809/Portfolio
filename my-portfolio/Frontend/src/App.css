@@ -1,4 +1,78 @@
 #root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Base App Wrapper - ensures 100vh layout */
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Mobile Preview Mode Wrapper (Simulates a Phone) */
+.mobile-preview-mode {
+  max-width: 414px;
+  /* iPhone Max width */
+  height: 85vh;
+  margin: 5vh auto;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 12px #111,
+    /* Bezel */
+    0 0 0 14px rgba(255, 255, 255, 0.1),
+    /* Phone Edge */
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    /* Drop Shadow */
+    0 0 100px rgba(0, 217, 255, 0.1);
+  /* Ambient Glow */
+  position: relative;
+  background: var(--bg-dark);
+}
+
+/* "Notch" for the phone preview */
+.mobile-preview-mode::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 25px;
+  background: #111;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.mobile-preview-mode>* {
+  /* Force children (pages) to understand they are inside a scrolling container */
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for the phone preview container */
+.mobile-preview-mode>*::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-preview-mode>*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-preview-mode>*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+#root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -11,9 +85,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +98,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

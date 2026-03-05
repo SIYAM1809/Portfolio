@@ -1,0 +1,66 @@
+.device-toggle-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.device-toggle-container {
+    background: rgba(10, 10, 20, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    transition: all 0.3s ease;
+}
+
+.device-toggle-container:hover {
+    border-color: rgba(0, 217, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+}
+
+.device-toggle-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    width: 40px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.device-toggle-btn:hover {
+    color: white;
+}
+
+.device-toggle-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-cyan);
+    box-shadow: inset 0 0 10px rgba(0, 217, 255, 0.1);
+}
+
+.device-toggle-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 4px;
+}
+
+/* Hide toggle on actual mobile devices */
+@media (max-width: 768px) {
+    .device-toggle-wrapper {
+        display: none;
+    }
+}
